@@ -6,14 +6,20 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { Search } from "lucide-react";
-import { ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download, Droplets } from "lucide-react";
+import { ThemeSelector } from "@/components/ui/theme-selector";
+import { useTheme } from "@/hooks/use-theme";
+import { Search, Droplets, Waves, Mountain, Leaf, ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download } from "lucide-react";
 import type { SwmmSection } from "@shared/schema";
+
+const iconMap = { Droplets, Waves, Mountain, Leaf };
 
 export default function Home() {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(["overview", "program-description", "history-timeline"]));
   const [searchQuery, setSearchQuery] = useState("");
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set(["overview", "program-description"]));
+  
+  const { themeConfig } = useTheme();
+  const ThemeIcon = iconMap[themeConfig.icon as keyof typeof iconMap] || Droplets;
 
   const { data: sections = [], isLoading } = useQuery<SwmmSection[]>({
     queryKey: ["/api/sections"],
@@ -58,10 +64,10 @@ export default function Home() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-ufOrange rounded-lg flex items-center justify-center">
-                  <Droplets className="text-white w-4 h-4" />
+                <div className="w-8 h-8 bg-theme-primary rounded-lg flex items-center justify-center">
+                  <ThemeIcon className="text-white w-4 h-4" />
                 </div>
-                <h1 className="text-xl font-bold text-ufBlue">SWMM5Wiki</h1>
+                <h1 className="text-xl font-bold text-theme-secondary">SWMM5Wiki</h1>
               </div>
               <span className="text-sm text-muted-foreground">Interactive Storm Droplets Management Guide</span>
             </div>
@@ -80,12 +86,15 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="flex items-center space-x-3" data-testid="progress-tracker">
-              <span className="text-sm text-muted-foreground">Progress:</span>
-              <div className="w-20">
-                <Progress value={progressPercent} className="h-2" />
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-3" data-testid="progress-tracker">
+                <span className="text-sm text-muted-foreground">Progress:</span>
+                <div className="w-20">
+                  <Progress value={progressPercent} className="h-2" />
+                </div>
+                <span className="text-sm font-medium text-theme-secondary">{progressPercent}%</span>
               </div>
-              <span className="text-sm font-medium text-ufBlue">{progressPercent}%</span>
+              <ThemeSelector />
             </div>
           </div>
         </div>
@@ -95,13 +104,13 @@ export default function Home() {
         {/* Sidebar Navigation */}
         <aside className="w-80 bg-white border-r border-border h-screen overflow-y-auto sticky top-16" data-testid="sidebar">
           <div className="p-6">
-            <h2 className="text-lg font-semibold text-ufBlue mb-4">Table of Contents</h2>
+            <h2 className="text-lg font-semibold text-theme-secondary mb-4">Table of Contents</h2>
             
             {/* Progress Overview */}
             <div className="bg-ufLightBlue rounded-lg p-4 mb-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-ufBlue">Learning Progress</span>
-                <span className="text-xs text-ufBlue">{completedSections.size} of {sections.length} sections</span>
+                <span className="text-sm font-medium text-theme-secondary">Learning Progress</span>
+                <span className="text-xs text-theme-secondary">{completedSections.size} of {sections.length} sections</span>
               </div>
               <Progress value={progressPercent} className="h-2" data-testid="progress-bar" />
             </div>
@@ -118,7 +127,7 @@ export default function Home() {
                       variant="ghost"
                       className={`w-full justify-between p-3 h-auto ${
                         isCurrent 
-                          ? "bg-ufLightOrange border border-ufOrange text-ufOrange" 
+                          ? "bg-theme-light-primary border border-theme-primary text-theme-primary" 
                           : "hover:bg-muted"
                       }`}
                       onClick={() => {
@@ -155,7 +164,7 @@ export default function Home() {
                   href="https://en.wikipedia.org/wiki/Storm_Water_Management_Model" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-sm text-ufBlue hover:text-ufOrange transition-colors"
+                  className="flex items-center space-x-2 text-sm text-theme-secondary hover:text-theme-primary transition-colors"
                   data-testid="link-wikipedia"
                 >
                   <ExternalLink className="w-3 h-3" />
@@ -165,7 +174,7 @@ export default function Home() {
                   href="https://www.epa.gov/water-research/storm-water-management-model-swmm" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="flex items-center space-x-2 text-sm text-ufBlue hover:text-ufOrange transition-colors"
+                  className="flex items-center space-x-2 text-sm text-theme-secondary hover:text-theme-primary transition-colors"
                   data-testid="link-epa"
                 >
                   <ExternalLink className="w-3 h-3" />
@@ -174,7 +183,7 @@ export default function Home() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="flex items-center space-x-2 text-sm text-ufBlue hover:text-ufOrange p-0 h-auto justify-start"
+                  className="flex items-center space-x-2 text-sm text-theme-secondary hover:text-theme-primary p-0 h-auto justify-start"
                   data-testid="button-download"
                 >
                   <Download className="w-3 h-3" />
@@ -189,7 +198,7 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto" data-testid="main-content">
           <div className="max-w-4xl mx-auto p-8">
             {/* Hero Section */}
-            <div className="bg-gradient-to-br from-ufBlue to-blue-700 rounded-2xl p-8 text-white mb-8" data-testid="hero-section">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white mb-8" data-testid="hero-section" style={{background: `linear-gradient(to bottom right, var(--theme-secondary), hsl(from var(--theme-secondary) h s calc(l - 10%)))`}}>
               <div className="flex items-start justify-between">
                 <div>
                   <h1 className="text-4xl font-bold mb-4">Storm Droplets for SWMM5</h1>
@@ -232,24 +241,24 @@ export default function Home() {
               >
                 {/* Section Header */}
                 <div className={`p-6 border-b border-border ${
-                  section.slug === "history-timeline" ? "bg-ufLightOrange" : ""
+                  section.slug === "history-timeline" ? "bg-theme-light-primary" : ""
                 }`}>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
                       {section.slug === "history-timeline" ? (
-                        <Play className="w-5 h-5 text-ufOrange" />
+                        <Play className="w-5 h-5 text-theme-primary" />
                       ) : completedSections.has(section.slug) ? (
                         <CheckCircle className="w-5 h-5 text-green-500" />
                       ) : (
                         <Circle className="w-5 h-5 text-gray-300" />
                       )}
-                      <h2 className="text-2xl font-bold text-ufBlue">{section.title}</h2>
+                      <h2 className="text-2xl font-bold text-theme-secondary">{section.title}</h2>
                     </div>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={() => toggleSection(section.slug)}
-                      className="text-ufOrange hover:text-ufBlue"
+                      className="text-theme-primary hover:text-theme-secondary"
                       data-testid={`toggle-${section.slug}`}
                     >
                       {expandedSections.has(section.slug) ? (
@@ -282,12 +291,12 @@ export default function Home() {
                         </p>
                         
                         <div className="bg-ufLightBlue rounded-lg p-6 mb-6">
-                          <h3 className="text-lg font-semibold text-ufBlue mb-3">Key Characteristics</h3>
+                          <h3 className="text-lg font-semibold text-theme-secondary mb-3">Key Characteristics</h3>
                           <div className="grid md:grid-cols-2 gap-4">
                             {(section.content as any)?.characteristics?.map((char: any, index: number) => (
                               <div key={index} className="flex items-start space-x-3">
-                                <div className="w-8 h-8 rounded-full bg-ufOrange/10 flex items-center justify-center flex-shrink-0">
-                                  <Droplets className="w-4 h-4 text-ufOrange" />
+                                <div className="w-8 h-8 rounded-full bg-theme-primary/10 flex items-center justify-center flex-shrink-0">
+                                  <ThemeIcon className="w-4 h-4 text-theme-primary" />
                                 </div>
                                 <div>
                                   <h4 className="font-medium">{char.title}</h4>
@@ -359,11 +368,11 @@ export default function Home() {
                       <div>
                         <div className="grid lg:grid-cols-2 gap-8 mb-8">
                           <div>
-                            <h3 className="text-lg font-semibold text-ufBlue mb-4">Hydrologic Processes</h3>
+                            <h3 className="text-lg font-semibold text-theme-secondary mb-4">Hydrologic Processes</h3>
                             <div className="space-y-3">
                               {(section.content as any)?.hydrologicProcesses?.map((process: string, index: number) => (
-                                <div key={index} className="flex items-center space-x-3 p-3 bg-ufLightBlue rounded-lg">
-                                  <Droplets className="w-4 h-4 text-ufOrange" />
+                                <div key={index} className="flex items-center space-x-3 p-3 bg-theme-light-secondary rounded-lg">
+                                  <ThemeIcon className="w-4 h-4 text-theme-primary" />
                                   <span>{process}</span>
                                 </div>
                               ))}
@@ -371,11 +380,11 @@ export default function Home() {
                           </div>
                           
                           <div>
-                            <h3 className="text-lg font-semibold text-ufBlue mb-4">Hydraulic Capabilities</h3>
+                            <h3 className="text-lg font-semibold text-theme-secondary mb-4">Hydraulic Capabilities</h3>
                             <div className="space-y-3">
                               {(section.content as any)?.hydraulicCapabilities?.map((capability: string, index: number) => (
-                                <div key={index} className="flex items-center space-x-3 p-3 bg-ufLightOrange rounded-lg">
-                                  <Droplets className="w-4 h-4 text-ufBlue" />
+                                <div key={index} className="flex items-center space-x-3 p-3 bg-theme-light-primary rounded-lg">
+                                  <ThemeIcon className="w-4 h-4 text-theme-secondary" />
                                   <span>{capability}</span>
                                 </div>
                               ))}
@@ -384,12 +393,12 @@ export default function Home() {
                         </div>
 
                         <div>
-                          <h3 className="text-lg font-semibold text-ufBlue mb-4">Typical Applications</h3>
+                          <h3 className="text-lg font-semibold text-theme-secondary mb-4">Typical Applications</h3>
                           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {(section.content as any)?.applications?.map((app: any, index: number) => (
                               <Card key={index} className="p-4 hover:shadow-md transition-shadow">
                                 <div className="flex items-center space-x-2 mb-2">
-                                  <Droplets className="w-4 h-4 text-ufOrange" />
+                                  <ThemeIcon className="w-4 h-4 text-theme-primary" />
                                   <h4 className="font-medium">{app.title}</h4>
                                 </div>
                                 <p className="text-sm text-muted-foreground">{app.description}</p>
@@ -428,7 +437,7 @@ export default function Home() {
                                     {item.year}
                                   </div>
                                   <Card className={`flex-1 ${cardClass} rounded-lg p-6 ${item.current ? "border-2 border-ufOrange" : ""}`}>
-                                    <h3 className="text-lg font-semibold text-ufBlue mb-2">{item.title}</h3>
+                                    <h3 className="text-lg font-semibold text-theme-secondary mb-2">{item.title}</h3>
                                     <p className="text-muted-foreground mb-3">{item.description}</p>
                                     <div className="flex flex-wrap gap-2 text-sm">
                                       <Badge variant="outline" className="bg-white">
@@ -438,7 +447,7 @@ export default function Home() {
                                         <Badge 
                                           key={idx} 
                                           variant={item.current ? "default" : "secondary"}
-                                          className={item.current ? "bg-ufOrange text-white" : ""}
+                                          className={item.current ? "bg-theme-primary text-white" : ""}
                                         >
                                           {highlight}
                                         </Badge>
@@ -456,8 +465,8 @@ export default function Home() {
                           {(section.content as any)?.statistics?.map((stat: any, index: number) => {
                             const bgClass = index === 0 ? "bg-ufLightBlue" :
                                            index === 1 ? "bg-ufLightOrange" : "bg-green-50";
-                            const textClass = index === 0 ? "text-ufBlue" :
-                                             index === 1 ? "text-ufOrange" : "text-green-600";
+                            const textClass = index === 0 ? "text-theme-secondary" :
+                                             index === 1 ? "text-theme-primary" : "text-green-600";
                             
                             return (
                               <div key={index} className={`text-center p-4 ${bgClass} rounded-lg`} data-testid={`statistic-${index}`}>
@@ -475,7 +484,7 @@ export default function Home() {
             ))}
 
             {/* Continue Learning Section */}
-            <div className="bg-gradient-to-r from-ufBlue to-blue-700 rounded-xl p-6 text-white" data-testid="continue-learning">
+            <div className="bg-gradient-to-r rounded-xl p-6 text-white" data-testid="continue-learning" style={{background: `linear-gradient(to right, var(--theme-secondary), hsl(from var(--theme-secondary) h s calc(l - 10%)))`}}>
               <h3 className="text-xl font-semibold mb-4">Continue Learning</h3>
               <p className="mb-4">Explore the remaining sections to complete your SWMM5 journey:</p>
               <div className="grid md:grid-cols-2 gap-4">
@@ -485,7 +494,7 @@ export default function Home() {
                   data-testid="button-conceptual-model"
                 >
                   <div className="flex items-center space-x-3">
-                    <Droplets className="w-4 h-4 text-ufOrange" />
+                    <ThemeIcon className="w-4 h-4 text-theme-primary" />
                     <div>
                       <h4 className="font-medium">Conceptual Model</h4>
                       <p className="text-sm text-blue-200">Understanding SWMM's environmental compartments</p>
@@ -498,7 +507,7 @@ export default function Home() {
                   data-testid="button-lid-development"
                 >
                   <div className="flex items-center space-x-3">
-                    <Droplets className="w-4 h-4 text-green-400" />
+                    <ThemeIcon className="w-4 h-4 text-green-400" />
                     <div>
                       <h4 className="font-medium">LID Development</h4>
                       <p className="text-sm text-blue-200">Low Impact Development features and controls</p>

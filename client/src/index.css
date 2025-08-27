@@ -40,7 +40,14 @@
   --sidebar-ring: hsl(202.8169 89.1213% 53.1373%);
   --radius: 0.5rem;
   
-  /* UF Gator Colors */
+  /* Theme Colors - UF Gators (default) */
+  --theme-primary: hsl(20 100% 50%);     /* Orange */
+  --theme-secondary: hsl(221 83% 33%);   /* Blue */
+  --theme-light-primary: hsl(20 100% 95%);
+  --theme-light-secondary: hsl(221 100% 95%);
+  --theme-name: "Gator Nation";
+  
+  /* Legacy UF Colors for backward compatibility */
   --uf-orange: hsl(20 100% 50%);
   --uf-blue: hsl(221 83% 33%);
   --uf-light-blue: hsl(221 100% 95%);
@@ -84,45 +91,108 @@
   }
 }
 
+/* Theme Variations */
+.theme-gators {
+  --theme-primary: hsl(20 100% 50%);     /* UF Orange */
+  --theme-secondary: hsl(221 83% 33%);   /* UF Blue */
+  --theme-light-primary: hsl(20 100% 95%);
+  --theme-light-secondary: hsl(221 100% 95%);
+  --theme-name: "Gator Nation";
+}
+
+.theme-beavers {
+  --theme-primary: hsl(20 100% 40%);     /* OSU Orange */
+  --theme-secondary: hsl(0 0% 20%);      /* OSU Black */
+  --theme-light-primary: hsl(20 100% 95%);
+  --theme-light-secondary: hsl(0 0% 95%);
+  --theme-name: "Beaver Nation";
+}
+
+.theme-buffaloes {
+  --theme-primary: hsl(213 100% 20%);    /* CU Dark Blue */
+  --theme-secondary: hsl(43 100% 60%);   /* CU Gold */
+  --theme-light-primary: hsl(213 100% 95%);
+  --theme-light-secondary: hsl(43 100% 95%);
+  --theme-name: "Ralphie's Herd";
+}
+
+.theme-epa {
+  --theme-primary: hsl(120 60% 35%);     /* EPA Green */
+  --theme-secondary: hsl(213 100% 35%);  /* EPA Blue */
+  --theme-light-primary: hsl(120 60% 95%);
+  --theme-light-secondary: hsl(213 100% 95%);
+  --theme-name: "EPA Official";
+}
+
 @layer components {
   .uf-orange {
     color: var(--uf-orange);
   }
   
+  /* Theme-aware utility classes */
+  .bg-theme-primary {
+    background-color: var(--theme-primary);
+  }
+  
+  .text-theme-primary {
+    color: var(--theme-primary);
+  }
+  
+  .border-theme-primary {
+    border-color: var(--theme-primary);
+  }
+  
+  .bg-theme-secondary {
+    background-color: var(--theme-secondary);
+  }
+  
+  .text-theme-secondary {
+    color: var(--theme-secondary);
+  }
+  
+  .border-theme-secondary {
+    border-color: var(--theme-secondary);
+  }
+  
+  .bg-theme-light-primary {
+    background-color: var(--theme-light-primary);
+  }
+  
+  .bg-theme-light-secondary {
+    background-color: var(--theme-light-secondary);
+  }
+  
+  /* Legacy UF classes for backward compatibility */
   .bg-ufOrange {
-    background-color: var(--uf-orange);
+    background-color: var(--theme-primary);
   }
   
   .text-ufOrange {
-    color: var(--uf-orange);
+    color: var(--theme-primary);
   }
   
   .border-ufOrange {
-    border-color: var(--uf-orange);
-  }
-  
-  .uf-blue {
-    color: var(--uf-blue);
+    border-color: var(--theme-primary);
   }
   
   .bg-ufBlue {
-    background-color: var(--uf-blue);
+    background-color: var(--theme-secondary);
   }
   
   .text-ufBlue {
-    color: var(--uf-blue);
+    color: var(--theme-secondary);
   }
   
   .border-ufBlue {
-    border-color: var(--uf-blue);
+    border-color: var(--theme-secondary);
   }
   
   .bg-ufLightBlue {
-    background-color: var(--uf-light-blue);
+    background-color: var(--theme-light-secondary);
   }
   
   .bg-ufLightOrange {
-    background-color: var(--uf-light-orange);
+    background-color: var(--theme-light-primary);
   }
   
   .timeline-item {
