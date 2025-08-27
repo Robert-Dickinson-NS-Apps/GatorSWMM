@@ -198,7 +198,7 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto" data-testid="main-content">
           <div className="max-w-4xl mx-auto p-8">
             {/* Hero Section */}
-            <div className="rounded-2xl p-8 mb-8 relative overflow-hidden" data-testid="hero-section" style={{background: `linear-gradient(135deg, var(--theme-secondary) 0%, hsl(from var(--theme-secondary) h s calc(l - 15%)) 100%)`}}>
+            <div className="rounded-2xl p-8 mb-8 relative overflow-hidden bg-gradient-to-br from-theme-secondary to-blue-800" data-testid="hero-section" style={{background: `linear-gradient(135deg, var(--theme-secondary) 0%, var(--theme-primary) 100%)`}}>
               {/* Dark overlay for text readability */}
               <div className="absolute inset-0 bg-black/20"></div>
               <div className="flex items-start justify-between relative z-10">
