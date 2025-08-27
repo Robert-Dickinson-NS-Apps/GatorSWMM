@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0 0% 98%);
+  --foreground: hsl(221 83% 20%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(221 83% 20%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(221 83% 20%);
+  --primary: hsl(221 83% 33%);
+  --primary-foreground: hsl(0 0% 98%);
+  --secondary: hsl(210 40% 96%);
+  --secondary-foreground: hsl(221 47% 11%);
+  --muted: hsl(210 40% 96%);
+  --muted-foreground: hsl(215 16% 47%);
+  --accent: hsl(210 40% 96%);
+  --accent-foreground: hsl(221 47% 11%);
+  --destructive: hsl(0 84% 60%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(214 32% 91%);
+  --input: hsl(214 32% 91%);
+  --ring: hsl(221 83% 53%);
+  --chart-1: hsl(203.8863 88.2845% 53.1373%);
+  --chart-2: hsl(159.7826 100% 36.0784%);
+  --chart-3: hsl(42.0290 92.8251% 56.2745%);
+  --chart-4: hsl(147.1429 78.5047% 41.9608%);
+  --chart-5: hsl(341.4894 75.2000% 50.9804%);
+  --sidebar: hsl(180 6.6667% 97.0588%);
+  --sidebar-foreground: hsl(210 25% 7.8431%);
+  --sidebar-primary: hsl(203.8863 88.2845% 53.1373%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(211.5789 51.3514% 92.7451%);
+  --sidebar-accent-foreground: hsl(203.8863 88.2845% 53.1373%);
+  --sidebar-border: hsl(205.0000 25.0000% 90.5882%);
+  --sidebar-ring: hsl(202.8169 89.1213% 53.1373%);
+  --radius: 0.5rem;
+  
+  /* UF Gator Colors */
+  --uf-orange: hsl(20 100% 50%);
+  --uf-blue: hsl(221 83% 33%);
+  --uf-light-blue: hsl(221 100% 95%);
+  --uf-light-orange: hsl(20 100% 95%);
+}
+
+.dark {
+  --background: hsl(221 83% 5%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(221 47% 11%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(221 47% 11%);
+  --popover-foreground: hsl(210 40% 98%);
+  --primary: hsl(221 83% 53%);
+  --primary-foreground: hsl(210 17% 98%);
+  --secondary: hsl(215 27.9% 16.9%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(215 27.9% 16.9%);
+  --muted-foreground: hsl(217.9 10.6% 64.9%);
+  --accent: hsl(215 27.9% 16.9%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62.8% 30.6%);
+  --destructive-foreground: hsl(210 40% 98%);
+  --border: hsl(217.2 32.6% 17.5%);
+  --input: hsl(217.2 32.6% 17.5%);
+  --ring: hsl(224.3 76.3% 48%);
+  --chart-1: hsl(220 70% 50%);
+  --chart-2: hsl(160 60% 45%);
+  --chart-3: hsl(30 80% 55%);
+  --chart-4: hsl(280 65% 60%);
+  --chart-5: hsl(340 75% 55%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .uf-orange {
+    color: var(--uf-orange);
+  }
+  
+  .bg-ufOrange {
+    background-color: var(--uf-orange);
+  }
+  
+  .text-ufOrange {
+    color: var(--uf-orange);
+  }
+  
+  .border-ufOrange {
+    border-color: var(--uf-orange);
+  }
+  
+  .uf-blue {
+    color: var(--uf-blue);
+  }
+  
+  .bg-ufBlue {
+    background-color: var(--uf-blue);
+  }
+  
+  .text-ufBlue {
+    color: var(--uf-blue);
+  }
+  
+  .border-ufBlue {
+    border-color: var(--uf-blue);
+  }
+  
+  .bg-ufLightBlue {
+    background-color: var(--uf-light-blue);
+  }
+  
+  .bg-ufLightOrange {
+    background-color: var(--uf-light-orange);
+  }
+  
+  .timeline-item {
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  
+  .timeline-item.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .search-highlight {
+    background-color: hsl(48 100% 88%);
+    padding: 2px 4px;
+    border-radius: 3px;
+  }
+  
+  .glossary-term {
+    @apply border-b border-dotted cursor-help;
+    border-color: var(--uf-orange);
+  }
+  
+  .section-completed {
+    @apply bg-green-50 border-green-200;
+  }
+  
+  .progress-bar {
+    transition: width 0.3s ease-in-out;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
