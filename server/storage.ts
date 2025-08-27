@@ -107,6 +107,8 @@ export class MemStorage implements IStorage {
       const progress: UserProgress = { 
         ...insertProgress, 
         id,
+        userId: insertProgress.userId || null,
+        sectionId: insertProgress.sectionId || null,
         completed: insertProgress.completed || false,
         completedAt: insertProgress.completed ? new Date() : null
       };
@@ -338,8 +340,9 @@ export class MemStorage implements IStorage {
     terms.forEach(term => {
       const id = randomUUID();
       const glossaryTerm: GlossaryTerm = { 
-        ...term, 
         id,
+        term: term.term,
+        definition: term.definition,
         category: term.category || null
       };
       this.glossaryTerms.set(id, glossaryTerm);
