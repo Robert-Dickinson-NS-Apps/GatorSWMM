@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { ThemeSelector } from "@/components/ui/theme-selector";
 import { useTheme } from "@/hooks/use-theme";
-import { Search, Droplets, Waves, Mountain, Leaf, ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download, Gamepad2 } from "lucide-react";
+import { Search, Droplets, Waves, Mountain, Leaf, ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download, Gamepad2, Code } from "lucide-react";
 import type { SwmmSection } from "@shared/schema";
 
 const iconMap = { Droplets, Waves, Mountain, Leaf };
@@ -217,6 +217,63 @@ export default function Home() {
                   <Download className="w-3 h-3" />
                   <span>Download SWMM 5.2.4</span>
                 </Button>
+              </div>
+            </div>
+
+            {/* Source Code Section */}
+            <div className="mt-6 pt-4 border-t border-border">
+              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg border border-blue-200 dark:border-blue-800 overflow-hidden">
+                <button
+                  onClick={() => toggleProcess('source-code')}
+                  className="w-full p-4 text-left hover:bg-blue-100 dark:hover:bg-blue-900 transition-colors"
+                  data-testid="source-code-section"
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <Code className="w-4 h-4 text-blue-600" />
+                      <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-200">View Source Code</h3>
+                    </div>
+                    {expandedProcesses.has('source-code') ? (
+                      <ChevronUp className="w-4 h-4 text-blue-600" />
+                    ) : (
+                      <ChevronDown className="w-4 h-4 text-blue-600" />
+                    )}
+                  </div>
+                  <p className="text-xs text-blue-700 dark:text-blue-300">
+                    Explore the React TypeScript codebase for this educational app
+                  </p>
+                </button>
+                {expandedProcesses.has('source-code') && (
+                  <div className="px-4 pb-4">
+                    <div className="bg-white/70 dark:bg-gray-800/70 rounded p-3 text-xs text-muted-foreground leading-relaxed border border-blue-300 dark:border-blue-700">
+                      <div className="space-y-2">
+                        <div>
+                          <strong>Frontend:</strong> React 18 + TypeScript + Vite
+                        </div>
+                        <div>
+                          <strong>Backend:</strong> Express.js + TypeScript
+                        </div>
+                        <div>
+                          <strong>UI:</strong> Tailwind CSS + shadcn/ui components
+                        </div>
+                        <div>
+                          <strong>Features:</strong> Interactive content, game system, theme switching
+                        </div>
+                        <div className="mt-3 pt-2 border-t border-blue-200 dark:border-blue-700">
+                          <a 
+                            href="https://github.com/replit/replit" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-2 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200 transition-colors"
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            <span>Built on Replit Platform</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
