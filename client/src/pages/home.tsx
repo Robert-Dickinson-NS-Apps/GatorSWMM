@@ -182,7 +182,7 @@ export default function Home() {
             <div className="bg-gradient-to-br from-ufBlue to-blue-700 rounded-2xl p-8 text-white mb-8" data-testid="hero-section">
               <div className="flex items-start justify-between">
                 <div>
-                  <h1 className="text-4xl font-bold mb-4">Storm Droplets Management Model (SWMM5)</h1>
+                  <h1 className="text-4xl font-bold mb-4">Storm Droplets for SWMM5</h1>
                   <p className="text-xl text-blue-100 mb-6 max-w-2xl">
                     EPA's comprehensive dynamic rainfall-runoff simulation model used worldwide for urban drainage system analysis and design.
                   </p>
