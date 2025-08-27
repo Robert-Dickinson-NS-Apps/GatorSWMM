@@ -406,24 +406,25 @@ export default function Home() {
                           SWMM has evolved over more than 50 years, with four major upgrades transforming it into today's comprehensive modeling platform.
                         </p>
                         
-                        <div className="relative">
+                        
+                        <div className="relative min-h-[800px]">
                           {/* Timeline Line */}
-                          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-ufOrange"></div>
+                          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-orange-500"></div>
                           
                           {/* Timeline Items */}
-                          <div className="space-y-8">
+                          <div className="space-y-8 relative z-10">
                             {(section.content as any)?.timelineItems?.map((item: any, index: number) => {
-                              const colorClass = item.color === "ufOrange" ? "bg-ufOrange" : 
-                                                item.color === "ufBlue" ? "bg-ufBlue" :
-                                                item.color === "green" ? "bg-green-500" : "bg-ufOrange";
+                              const colorClass = item.color === "ufOrange" ? "bg-orange-500" : 
+                                                item.color === "ufBlue" ? "bg-blue-600" :
+                                                item.color === "green" ? "bg-green-500" : "bg-orange-500";
                               
                               const cardClass = item.color === "ufOrange" ? "bg-ufLightOrange" :
                                                item.color === "ufBlue" ? "bg-blue-50" :
                                                item.color === "green" ? "bg-green-50" : "bg-ufLightOrange";
 
                               return (
-                                <div key={index} className="timeline-item flex items-start space-x-6" data-testid={`timeline-item-${item.year}`}>
-                                  <div className={`flex-shrink-0 w-16 h-16 ${colorClass} rounded-full flex items-center justify-center text-white font-bold`}>
+                                <div key={index} className="flex items-start space-x-6 relative" data-testid={`timeline-item-${item.year}`}>
+                                  <div className={`flex-shrink-0 w-16 h-16 ${colorClass} rounded-full flex items-center justify-center text-white font-bold text-sm relative z-20`}>
                                     {item.year}
                                   </div>
                                   <Card className={`flex-1 ${cardClass} rounded-lg p-6 ${item.current ? "border-2 border-ufOrange" : ""}`}>
