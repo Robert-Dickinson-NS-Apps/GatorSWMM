@@ -1,0 +1,97 @@
+## Typical Applications
+
+### flood-control.json
+```json
+{
+  "application": "Flood Control",
+  "background": "SWMM5 supports flood control applications by enabling the design and sizing of drainage system components such as pipes, channels, pumps, detention storage, and low impact development (LID) controls. It simulates stormwater runoff under various rainfall scenarios to evaluate system capacity, identify flood-prone areas, and optimize infrastructure to mitigate flooding. Key features include dynamic wave routing for accurate backwater effects and real-time control rules for adaptive management. This is essential for urban planning to reduce property damage and ensure public safety during extreme weather events."
+}
+```
+
+### design-and-sizing-of-drainage-system-components.json
+```json
+{
+  "application": "Design and sizing of drainage system components",
+  "background": "In SWMM5, design and sizing of drainage system components involve modeling conduits, nodes, pumps, and storage units to handle peak flows and volumes. Users input parameters like Manning's roughness, slopes, and cross-sections, then run simulations with design storms to check hydraulic performance, surcharge conditions, and overflow risks. Iterative adjustments ensure compliance with standards like peak flow reduction or volume capture. This application integrates hydrologic and hydraulic modules for comprehensive system optimization."
+}
+```
+
+### water-quality.json
+```json
+{
+  "application": "Water Quality",
+  "background": "SWMM5 models water quality by tracking pollutant buildup, washoff, and transport in runoff from subcatchments through the drainage network. It supports multiple pollutants with parameters for land use-specific accumulation rates, washoff exponents, and treatment efficiencies. This allows assessment of stormwater impacts on receiving waters, aiding in pollution control strategies. Integration with LID and BMPs evaluates reductions in total suspended solids, nutrients, and metals."
+}
+```
+
+### pollutant-loading-and-bmp-effectiveness.json
+```json
+{
+  "application": "Pollutant loading and BMP effectiveness",
+  "background": "SWMM5 estimates pollutant loading by calculating non-point source contributions from impervious and pervious areas, using event mean concentrations or buildup-washoff models. It evaluates Best Management Practices (BMPs) like detention ponds, filters, and swales for effectiveness in reducing loads, through water balance and removal efficiency simulations. Outputs include time series of pollutant concentrations and total loads, supporting TMDL compliance and green infrastructure design."
+}
+```
+
+### flood-mapping.json
+```json
+{
+  "application": "Flood Mapping",
+  "background": "Flood mapping in SWMM5 involves simulating inundation in natural channel systems and floodplains by modeling overbank flow, storage, and routing. It uses cross-section data for irregular channels and links to GIS for spatial visualization. Simulations with extreme rainfall events generate flood extents, depths, and durations, aiding in hazard mapping and evacuation planning. Integration with 2D models like SWMM's linkage to other tools enhances accuracy for large-scale floodplain analysis."
+}
+```
+
+### natural-channel-systems-and-flood-plains.json
+```json
+{
+  "application": "Natural channel systems and flood plains",
+  "background": "SWMM5 models natural channel systems and floodplains with irregular transect data defining channel geometry and overbank areas. Hydraulic routing accounts for friction losses, contractions/expansions, and floodplain storage. This supports analysis of riverine flooding, wetland interactions, and restoration projects, with outputs like water surface profiles and velocity distributions critical for environmental impact assessments."
+}
+```
+
+### cso-sso-control.json
+```json
+{
+  "application": "CSO/SSO Control",
+  "background": "SWMM5 facilitates CSO/SSO control by modeling combined and sanitary sewer systems under wet weather conditions, evaluating inflow/infiltration effects. It simulates overflow volumes and frequencies, testing strategies like storage tunnels, pump upgrades, or real-time controls to minimize discharges. Regulatory drivers include reducing untreated sewage releases to comply with Clean Water Act requirements."
+}
+```
+
+### combined-and-sanitary-sewer-overflow-strategies.json
+```json
+{
+  "application": "Combined and sanitary sewer overflow strategies",
+  "background": "Strategies for CSO/SSO in SWMM5 include designing gray and green infrastructure to capture excess flows, using control rules for dynamic operation of gates and pumps. Simulations assess long-term control plans (LTCPs) with continuous rainfall data, optimizing for cost-effectiveness and environmental benefits. Key metrics include overflow reduction percentages and peak flow attenuation."
+}
+```
+
+### master-planning.json
+```json
+{
+  "application": "Master Planning",
+  "background": "Master planning with SWMM5 involves holistic modeling of sewer collection systems and urban watersheds for long-term infrastructure development. It integrates land use changes, population growth projections, and climate scenarios to forecast system demands, identify bottlenecks, and prioritize upgrades. Outputs guide capital improvement programs, ensuring sustainable urban drainage."
+}
+```
+
+### sewer-collection-systems-and-urban-watersheds.json
+```json
+{
+  "application": "Sewer collection systems and urban watersheds",
+  "background": "SWMM5 models sewer collection systems with detailed pipe networks and urban watersheds divided into subcatchments for runoff generation. It handles dry and wet weather flows, sanitary loads, and RDII (rainfall-dependent inflow/infiltration). This supports capacity analysis, expansion planning, and integration with receiving water models for comprehensive watershed management."
+}
+```
+
+### regulatory-compliance.json
+```json
+{
+  "application": "Regulatory Compliance",
+  "background": "SWMM5 aids regulatory compliance by simulating scenarios for NPDES permits, CMOM (Capacity, Management, Operation, and Maintenance) programs, and TMDL (Total Maximum Daily Load) analysis. It generates reports on stormwater discharges, pollutant loads, and system performance to meet EPA standards, supporting permit applications and monitoring plans."
+}
+```
+
+### npdes-permits-cmom-and-tmdl-analysis.json
+```json
+{
+  "application": "NPDES permits, CMOM, and TMDL analysis",
+  "background": "For NPDES permits, SWMM5 models stormwater outfalls and treatment requirements; CMOM uses it for sewer system evaluations to prevent overflows; TMDL analysis computes watershed pollutant loads and allocations. Simulations provide data for compliance reporting, including event-based and continuous modeling for impaired waters restoration."
+}
+```

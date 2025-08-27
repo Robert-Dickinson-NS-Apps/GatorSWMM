@@ -218,32 +218,38 @@ export class MemStorage implements IStorage {
             {
               icon: "fas fa-shield-alt",
               title: "Flood Control", 
-              description: "Design and sizing of drainage system components"
+              description: "Design and sizing of drainage system components",
+              background: "SWMM5 supports flood control applications by enabling the design and sizing of drainage system components such as pipes, channels, pumps, detention storage, and low impact development (LID) controls. It simulates stormwater runoff under various rainfall scenarios to evaluate system capacity, identify flood-prone areas, and optimize infrastructure to mitigate flooding. Key features include dynamic wave routing for accurate backwater effects and real-time control rules for adaptive management."
             },
             {
               icon: "fas fa-tint",
               title: "Water Quality",
-              description: "Pollutant loading and BMP effectiveness"
+              description: "Pollutant loading and BMP effectiveness",
+              background: "SWMM5 models water quality by tracking pollutant buildup, washoff, and transport in runoff from subcatchments through the drainage network. It supports multiple pollutants with parameters for land use-specific accumulation rates, washoff exponents, and treatment efficiencies. This allows assessment of stormwater impacts on receiving waters, aiding in pollution control strategies. Integration with LID and BMPs evaluates reductions in total suspended solids, nutrients, and other contaminants."
             },
             {
               icon: "fas fa-map",
               title: "Flood Mapping",
-              description: "Natural channel systems and flood plains"  
+              description: "Natural channel systems and flood plains",
+              background: "Flood mapping in SWMM5 involves simulating inundation in natural channel systems and floodplains by modeling overbank flow, storage, and routing. It uses cross-section data for irregular channels and links to GIS for spatial visualization. Simulations with extreme rainfall events generate flood extents, depths, and durations, aiding in hazard mapping and evacuation planning. Integration with 2D models like SWMM's linkage to other tools enhances accuracy for large-scale applications."
             },
             {
               icon: "fas fa-exclamation-triangle",
               title: "CSO/SSO Control",
-              description: "Combined and sanitary sewer overflow strategies"
+              description: "Combined and sanitary sewer overflow strategies",
+              background: "SWMM5 facilitates CSO/SSO control by modeling combined and sanitary sewer systems under wet weather conditions, evaluating inflow/infiltration effects. It simulates overflow volumes and frequencies, testing strategies like storage tunnels, pump upgrades, or real-time controls to minimize discharges. Regulatory drivers include reducing untreated sewage releases to comply with Clean Water Act requirements."
             },
             {
               icon: "fas fa-clipboard-list", 
               title: "Master Planning",
-              description: "Sewer collection systems and urban watersheds"
+              description: "Sewer collection systems and urban watersheds",
+              background: "Master planning with SWMM5 involves holistic modeling of sewer collection systems and urban watersheds for long-term infrastructure development. It integrates land use changes, population growth projections, and climate scenarios to forecast system demands, identify bottlenecks, and prioritize upgrades. Outputs guide capital improvement programs, ensuring sustainable urban drainage."
             },
             {
               icon: "fas fa-balance-scale",
               title: "Regulatory Compliance", 
-              description: "NPDES permits, CMOM, and TMDL analysis"
+              description: "NPDES permits, CMOM, and TMDL analysis",
+              background: "SWMM5 aids regulatory compliance by simulating scenarios for NPDES permits, CMOM (Capacity, Management, Operation, and Maintenance) programs, and TMDL (Total Maximum Daily Load) analysis. It generates reports on stormwater discharges, pollutant loads, and system performance to meet EPA standards, supporting permit applications and monitoring plans."
             }
           ]
         }

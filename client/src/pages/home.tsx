@@ -649,12 +649,32 @@ export default function Home() {
                           <h3 className="text-lg font-semibold text-theme-secondary mb-4">Typical Applications</h3>
                           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {(section.content as any)?.applications?.map((app: any, index: number) => (
-                              <Card key={index} className="p-4 hover:shadow-md transition-shadow">
-                                <div className="flex items-center space-x-2 mb-2">
-                                  <ThemeIcon className="w-4 h-4 text-theme-primary" />
-                                  <h4 className="font-medium">{app.title}</h4>
-                                </div>
-                                <p className="text-sm text-muted-foreground">{app.description}</p>
+                              <Card key={index} className="overflow-hidden hover:shadow-md transition-shadow">
+                                <button
+                                  onClick={() => toggleProcess(`application-${index}`)}
+                                  className="w-full p-4 text-left hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                                  data-testid={`application-${app.title?.replace(/\s+/g, '-').toLowerCase()}`}
+                                >
+                                  <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-center space-x-2">
+                                      <ThemeIcon className="w-4 h-4 text-theme-primary" />
+                                      <h4 className="font-medium">{app.title}</h4>
+                                    </div>
+                                    {expandedProcesses.has(`application-${index}`) ? (
+                                      <ChevronUp className="w-4 h-4 text-theme-primary" />
+                                    ) : (
+                                      <ChevronDown className="w-4 h-4 text-theme-primary" />
+                                    )}
+                                  </div>
+                                  <p className="text-sm text-muted-foreground">{app.description}</p>
+                                </button>
+                                {expandedProcesses.has(`application-${index}`) && (
+                                  <div className="px-4 pb-4">
+                                    <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950 dark:to-indigo-950 rounded p-3 text-sm text-muted-foreground leading-relaxed border border-blue-200 dark:border-blue-800">
+                                      {app.background}
+                                    </div>
+                                  </div>
+                                )}
                               </Card>
                             ))}
                           </div>
