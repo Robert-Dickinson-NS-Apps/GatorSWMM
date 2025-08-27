@@ -218,9 +218,9 @@ export default function Home() {
                   </div>
                 </div>
                 <img 
-                  src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&h=300" 
-                  alt="Urban drainage system visualization" 
-                  className="rounded-xl shadow-lg w-64 h-48 object-cover hidden lg:block"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/NapervilleSWMM5.png/960px-NapervilleSWMM5.png" 
+                  alt="SWMM5 network diagram from Wikipedia showing urban drainage system modeling" 
+                  className="rounded-xl shadow-lg w-64 h-48 object-contain bg-white/10 backdrop-blur-sm border border-white/20 hidden lg:block"
                 />
               </div>
             </div>
