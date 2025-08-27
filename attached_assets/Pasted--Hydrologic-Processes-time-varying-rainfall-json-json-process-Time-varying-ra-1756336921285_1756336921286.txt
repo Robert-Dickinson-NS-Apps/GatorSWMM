@@ -1,0 +1,99 @@
+## Hydrologic Processes
+
+### time-varying-rainfall.json
+```json
+{
+  "process": "Time-varying rainfall",
+  "background": "In SWMM5, time-varying rainfall is modeled using rain gage objects that supply precipitation data to subcatchment areas. Rainfall can be input as user-defined time series or from external files in various formats (e.g., user-prepared, NCDC, DSI-3240, HLY03, 15M03). The model assumes rainfall is constant over each time interval. Key parameters include time interval (e.g., 5-15 minutes for typical applications), units (intensity or volume), and station ID for file-based input. This allows simulation of spatially and temporally varied precipitation, essential for accurate runoff modeling in urban areas. SWMM5 interpolates data and handles long-term continuous simulations, with tools like PCSWMM for data processing."
+}
+```
+
+### evaporation-of-standing-water.json
+```json
+{
+  "process": "Evaporation of standing water",
+  "background": "SWMM5 models evaporation of standing surface water as part of hydrologic losses from subcatchment surfaces, groundwater aquifers, open channels, and storage units. Evaporation rates can be specified as constant values, monthly averages, time series, computed via the Hargreaves method from daily min/max temperatures, or from external climate files. These represent potential rates; actual evaporation is limited by available water. For standing water on subcatchments, it primarily affects depression storage. Key parameters include pan coefficients for adjustment and dry-only flags to restrict evaporation during wet periods. This process reduces runoff volume and is crucial for long-term simulations."
+}
+```
+
+### snow-accumulation-and-melting.json
+```json
+{
+  "process": "Snow accumulation and melting",
+  "background": "SWMM5 simulates snow accumulation and melting using a temperature index method on subcatchment surfaces. Precipitation falls as snow if air temperature is below a dividing temperature. Snow accumulates until melting occurs when temperature rises. Melting is modeled with degree-day coefficients, considering factors like elevation bands, areal depletion curves, and plowing/transfer to snow packs. Key parameters include dividing temperature for rain/snow, melt coefficients, base melt temperature, and cold content factors. Snow can be redistributed via plowing rules. This is vital for cold climate modeling, affecting runoff timing and volume."
+}
+```
+
+### rainfall-infiltration.json
+```json
+{
+  "process": "Rainfall infiltration",
+  "background": "Rainfall infiltration in SWMM5 is modeled for pervious areas of subcatchments using methods like Horton, Modified Horton, Green-Ampt, Modified Green-Ampt, or Curve Number. It represents water soaking into unsaturated soil layers, reducing surface runoff. For Green-Ampt, it uses suction head, conductivity, and initial deficit. Horton uses max/min rates and decay constant. Key concepts include recovery during dry periods via evaporation or soil drying patterns. Spatial variability is handled by dividing subcatchments. This process feeds groundwater and affects overall water balance."
+}
+```
+
+### groundwater-percolation.json
+```json
+{
+  "process": "Groundwater percolation",
+  "background": "Groundwater percolation in SWMM5 models the movement of infiltrated water from unsaturated to saturated soil zones (aquifers) beneath subcatchments. It uses parameters like porosity, field capacity, wilting point, hydraulic conductivity, and aquifer geometry. Percolation rate depends on upper zone moisture content. Groundwater can interact with drainage systems via lateral flow or deep percolation. Key equations include Darcy's law for flow. Users can define custom outflow equations. This process influences baseflow, interflow, and long-term hydrology."
+}
+```
+
+### low-impact-development-lid.json
+```json
+{
+  "process": "Low Impact Development (LID)",
+  "background": "LID in SWMM5 simulates green infrastructure practices to reduce runoff, such as bio-retention cells, rain gardens, green roofs, infiltration trenches, permeable pavement, rain barrels, and vegetative swales. Each LID type has layers (surface, soil, storage, pavement, drain) with parameters for storage depth, void ratio, conductivity, clogging, etc. Processes include infiltration, evaporation, percolation, and underdrain flow. LIDs are placed within subcatchments, occupying a fraction of the area, and help mimic pre-development hydrology. Reporting includes detailed water balance for each LID unit."
+}
+```
+
+## Hydraulic Capabilities
+
+### unlimited-network-size.json
+```json
+{
+  "process": "Unlimited network size",
+  "background": "SWMM5 supports modeling of drainage networks of unlimited size, with no fixed limit on the number of nodes, links, or other objects. This capability allows simulation of large, complex urban stormwater systems, combined sewers, or regional watersheds. Memory allocation is dynamic, constrained only by system resources. This feature enables detailed modeling without artificial segmentation, improving accuracy for large-scale planning and analysis."
+}
+```
+
+### various-conduit-shapes.json
+```json
+{
+  "process": "Various conduit shapes",
+  "background": "SWMM5 allows a wide variety of closed and open conduit shapes, including circular, rectangular, trapezoidal, triangular, parabolic, power function, modified basket-handle, and user-defined custom shapes. Natural channels can be modeled with irregular cross-sections defined by station-elevation data. This flexibility accommodates diverse urban drainage infrastructure, enabling accurate hydraulic computations using Manning's equation for friction losses."
+}
+```
+
+### pumps-weirs-and-orifices.json
+```json
+{
+  "process": "Pumps, weirs, and orifices",
+  "background": "SWMM5 models control structures like pumps (ideal, types 1-4, variable speed), weirs (transverse, sidewall, v-notch, trapezoidal), and orifices (side/bottom discharge). Pumps use on/off depths or curves relating flow to wet well volume/head. Weirs and orifices follow standard hydraulic equations, with parameters like crest height, discharge coefficients, and flap gates for backflow prevention. These elements simulate flow regulation, storage management, and overflow conditions in sewer systems."
+}
+```
+
+### dynamic-wave-routing.json
+```json
+{
+  "process": "Dynamic wave routing",
+  "background": "Dynamic wave routing in SWMM5 solves the full Saint-Venant equations for unsteady flow in open channels and closed conduits, accounting for channel storage, backwater, entrance/exit losses, flow reversal, and pressurized flow. It uses an implicit finite difference scheme for accuracy in complex networks. Key parameters include routing time step (shorter than wet weather step for stability). This method is ideal for systems with significant backwater or surcharging, providing detailed hydraulic profiles."
+}
+```
+
+### backwater-and-reverse-flow.json
+```json
+{
+  "process": "Backwater and reverse flow",
+  "background": "SWMM5's dynamic wave routing inherently handles backwater effects and reverse flow in conduits. Backwater occurs when downstream conditions restrict upstream flow, causing water levels to rise. Reverse flow is simulated when gradients allow flow against the defined direction. No special parameters are needed; it's part of the Saint-Venant solution. This is critical for accurate modeling of looped networks, tidal influences, or surcharged systems."
+}
+```
+
+### real-time-control-rules.json
+```json
+{
+  "process": "Real-time control rules",
+  "background": "Real-time control (RTC) in SWMM5 uses user-defined rules to dynamically adjust settings of pumps, orifices, weirs, and outlets based on simulation time or conditions like depths, flows, or volumes at nodes/links. Rules consist of premises (if/then conditions) and actions, supporting logical operators and variables/expressions. This enables simulation of adaptive strategies for flood control, CSO minimization, or optimization, with no limit on rule complexity."
+}
+```

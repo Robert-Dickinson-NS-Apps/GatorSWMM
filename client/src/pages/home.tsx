@@ -15,6 +15,7 @@ const iconMap = { Droplets, Waves, Mountain, Leaf };
 
 export default function Home() {
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(["overview", "program-description", "history-timeline"]));
+  const [expandedProcesses, setExpandedProcesses] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const [completedSections, setCompletedSections] = useState<Set<string>>(new Set(["overview", "program-description"]));
   
@@ -37,6 +38,16 @@ export default function Home() {
       newExpanded.add(slug);
     }
     setExpandedSections(newExpanded);
+  };
+
+  const toggleProcess = (processName: string) => {
+    const newExpanded = new Set(expandedProcesses);
+    if (newExpanded.has(processName)) {
+      newExpanded.delete(processName);
+    } else {
+      newExpanded.add(processName);
+    }
+    setExpandedProcesses(newExpanded);
   };
 
   const markSectionCompleted = (slug: string) => {
@@ -572,10 +583,30 @@ export default function Home() {
                           <div>
                             <h3 className="text-lg font-semibold text-theme-secondary mb-4">Hydrologic Processes</h3>
                             <div className="space-y-3">
-                              {(section.content as any)?.hydrologicProcesses?.map((process: string, index: number) => (
-                                <div key={index} className="flex items-center space-x-3 p-3 bg-theme-light-secondary rounded-lg">
-                                  <ThemeIcon className="w-4 h-4 text-theme-primary" />
-                                  <span>{process}</span>
+                              {(section.content as any)?.hydrologicProcesses?.map((process: any, index: number) => (
+                                <div key={index} className="bg-theme-light-secondary rounded-lg overflow-hidden">
+                                  <button
+                                    onClick={() => toggleProcess(`hydro-${index}`)}
+                                    className="w-full flex items-center justify-between p-3 hover:bg-theme-light-secondary/80 transition-colors text-left"
+                                    data-testid={`process-${process.name?.replace(/\s+/g, '-').toLowerCase()}`}
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <ThemeIcon className="w-4 h-4 text-theme-primary" />
+                                      <span className="font-medium">{process.name}</span>
+                                    </div>
+                                    {expandedProcesses.has(`hydro-${index}`) ? (
+                                      <ChevronUp className="w-4 h-4 text-theme-primary" />
+                                    ) : (
+                                      <ChevronDown className="w-4 h-4 text-theme-primary" />
+                                    )}
+                                  </button>
+                                  {expandedProcesses.has(`hydro-${index}`) && (
+                                    <div className="px-3 pb-3">
+                                      <div className="bg-white/50 dark:bg-gray-800/50 rounded p-3 text-sm text-muted-foreground leading-relaxed">
+                                        {process.description}
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
                               ))}
                             </div>
@@ -584,10 +615,30 @@ export default function Home() {
                           <div>
                             <h3 className="text-lg font-semibold text-theme-secondary mb-4">Hydraulic Capabilities</h3>
                             <div className="space-y-3">
-                              {(section.content as any)?.hydraulicCapabilities?.map((capability: string, index: number) => (
-                                <div key={index} className="flex items-center space-x-3 p-3 bg-theme-light-primary rounded-lg">
-                                  <ThemeIcon className="w-4 h-4 text-theme-secondary" />
-                                  <span>{capability}</span>
+                              {(section.content as any)?.hydraulicCapabilities?.map((capability: any, index: number) => (
+                                <div key={index} className="bg-theme-light-primary rounded-lg overflow-hidden">
+                                  <button
+                                    onClick={() => toggleProcess(`hydraulic-${index}`)}
+                                    className="w-full flex items-center justify-between p-3 hover:bg-theme-light-primary/80 transition-colors text-left"
+                                    data-testid={`capability-${capability.name?.replace(/\s+/g, '-').toLowerCase()}`}
+                                  >
+                                    <div className="flex items-center space-x-3">
+                                      <ThemeIcon className="w-4 h-4 text-theme-secondary" />
+                                      <span className="font-medium">{capability.name}</span>
+                                    </div>
+                                    {expandedProcesses.has(`hydraulic-${index}`) ? (
+                                      <ChevronUp className="w-4 h-4 text-theme-secondary" />
+                                    ) : (
+                                      <ChevronDown className="w-4 h-4 text-theme-secondary" />
+                                    )}
+                                  </button>
+                                  {expandedProcesses.has(`hydraulic-${index}`) && (
+                                    <div className="px-3 pb-3">
+                                      <div className="bg-white/50 dark:bg-gray-800/50 rounded p-3 text-sm text-muted-foreground leading-relaxed">
+                                        {capability.description}
+                                      </div>
+                                    </div>
+                                  )}
                                 </div>
                               ))}
                             </div>
