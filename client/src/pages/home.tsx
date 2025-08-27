@@ -4,10 +4,9 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { SearchBar } from "@/components/ui/search-bar";
-import { ProgressTracker } from "@/components/ui/progress-tracker";
-import { Timeline } from "@/components/ui/timeline";
-import { GlossaryTerm } from "@/components/ui/glossary-term";
+import { Input } from "@/components/ui/input";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Search } from "lucide-react";
 import { ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download, Droplets } from "lucide-react";
 import type { SwmmSection } from "@shared/schema";
 
@@ -68,15 +67,26 @@ export default function Home() {
             </div>
             
             <div className="flex-1 max-w-md mx-8">
-              <SearchBar onSearch={setSearchQuery} data-testid="search-input" />
+              <div className="relative">
+                <Input
+                  type="text"
+                  placeholder="Search SWMM5 content..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 pr-4 py-2 w-full border border-border rounded-lg focus:ring-2 focus:ring-ufOrange focus:border-transparent outline-none"
+                  data-testid="search-input"
+                />
+                <Search className="absolute left-3 top-3 w-4 h-4 text-muted-foreground" />
+              </div>
             </div>
             
-            <ProgressTracker 
-              progress={progressPercent} 
-              completed={completedSections.size} 
-              total={sections.length}
-              data-testid="progress-tracker"
-            />
+            <div className="flex items-center space-x-3" data-testid="progress-tracker">
+              <span className="text-sm text-muted-foreground">Progress:</span>
+              <div className="w-20">
+                <Progress value={progressPercent} className="h-2" />
+              </div>
+              <span className="text-sm font-medium text-ufBlue">{progressPercent}%</span>
+            </div>
           </div>
         </div>
       </header>
@@ -258,11 +268,16 @@ export default function Home() {
                       <div>
                         <p className="text-lg leading-relaxed mb-4">
                           The United States Environmental Protection Agency (EPA){" "}
-                          <GlossaryTerm 
-                            term="Storm Water Management Model (SWMM)" 
-                            definition="A dynamic rainfall-runoff-subsurface runoff simulation model for urban drainage systems"
-                            className="font-semibold text-ufBlue"
-                          />{" "}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="font-semibold text-ufBlue border-b border-dotted border-ufOrange cursor-help">
+                                Storm Water Management Model (SWMM)
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>A dynamic rainfall-runoff-subsurface runoff simulation model for urban drainage systems</p>
+                            </TooltipContent>
+                          </Tooltip>{" "}
                           is a comprehensive tool used throughout the world for planning, analysis and design related to stormwater runoff, combined and sanitary sewers, and other drainage systems in urban areas.
                         </p>
                         
@@ -285,27 +300,57 @@ export default function Home() {
 
                         <p className="leading-relaxed">
                           SWMM can simulate various hydrological processes including{" "}
-                          <GlossaryTerm 
-                            term="rainfall-runoff" 
-                            definition="The process by which water from precipitation flows over land surfaces to drainage systems"
-                          />,{" "}
-                          <GlossaryTerm 
-                            term="evaporation" 
-                            definition="The process of water changing from liquid to vapor"
-                          />,{" "}
-                          <GlossaryTerm 
-                            term="infiltration" 
-                            definition="The process by which water on the ground surface enters the soil"
-                          />, and groundwater interactions. 
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="border-b border-dotted border-ufOrange cursor-help">
+                                rainfall-runoff
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>The process by which water from precipitation flows over land surfaces to drainage systems</p>
+                            </TooltipContent>
+                          </Tooltip>,{" "}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="border-b border-dotted border-ufOrange cursor-help">
+                                evaporation
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>The process of water changing from liquid to vapor</p>
+                            </TooltipContent>
+                          </Tooltip>,{" "}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="border-b border-dotted border-ufOrange cursor-help">
+                                infiltration
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>The process by which water on the ground surface enters the soil</p>
+                            </TooltipContent>
+                          </Tooltip>, and groundwater interactions. 
                           The model operates on collections of subcatchment areas divided into{" "}
-                          <GlossaryTerm 
-                            term="impervious" 
-                            definition="Surfaces that do not allow water to penetrate, like concrete and asphalt"
-                          /> and{" "}
-                          <GlossaryTerm 
-                            term="pervious" 
-                            definition="Surfaces that allow water to penetrate, like soil and grass"
-                          /> areas.
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="border-b border-dotted border-ufOrange cursor-help">
+                                impervious
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Surfaces that do not allow water to penetrate, like concrete and asphalt</p>
+                            </TooltipContent>
+                          </Tooltip> and{" "}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span className="border-b border-dotted border-ufOrange cursor-help">
+                                pervious
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Surfaces that allow water to penetrate, like soil and grass</p>
+                            </TooltipContent>
+                          </Tooltip> areas.
                         </p>
                       </div>
                     )}
@@ -356,11 +401,72 @@ export default function Home() {
                     )}
 
                     {(section.content as any)?.type === "timeline" && (
-                      <Timeline 
-                        items={(section.content as any)?.timelineItems} 
-                        statistics={(section.content as any)?.statistics}
-                        data-testid="timeline-component"
-                      />
+                      <div data-testid="timeline-component">
+                        <p className="text-lg leading-relaxed mb-8 text-center">
+                          SWMM has evolved over more than 50 years, with four major upgrades transforming it into today's comprehensive modeling platform.
+                        </p>
+                        
+                        <div className="relative">
+                          {/* Timeline Line */}
+                          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-ufOrange"></div>
+                          
+                          {/* Timeline Items */}
+                          <div className="space-y-8">
+                            {(section.content as any)?.timelineItems?.map((item: any, index: number) => {
+                              const colorClass = item.color === "ufOrange" ? "bg-ufOrange" : 
+                                                item.color === "ufBlue" ? "bg-ufBlue" :
+                                                item.color === "green" ? "bg-green-500" : "bg-ufOrange";
+                              
+                              const cardClass = item.color === "ufOrange" ? "bg-ufLightOrange" :
+                                               item.color === "ufBlue" ? "bg-blue-50" :
+                                               item.color === "green" ? "bg-green-50" : "bg-ufLightOrange";
+
+                              return (
+                                <div key={index} className="timeline-item flex items-start space-x-6" data-testid={`timeline-item-${item.year}`}>
+                                  <div className={`flex-shrink-0 w-16 h-16 ${colorClass} rounded-full flex items-center justify-center text-white font-bold`}>
+                                    {item.year}
+                                  </div>
+                                  <Card className={`flex-1 ${cardClass} rounded-lg p-6 ${item.current ? "border-2 border-ufOrange" : ""}`}>
+                                    <h3 className="text-lg font-semibold text-ufBlue mb-2">{item.title}</h3>
+                                    <p className="text-muted-foreground mb-3">{item.description}</p>
+                                    <div className="flex flex-wrap gap-2 text-sm">
+                                      <Badge variant="outline" className="bg-white">
+                                        {item.era}
+                                      </Badge>
+                                      {item.highlights?.map((highlight: string, idx: number) => (
+                                        <Badge 
+                                          key={idx} 
+                                          variant={item.current ? "default" : "secondary"}
+                                          className={item.current ? "bg-ufOrange text-white" : ""}
+                                        >
+                                          {highlight}
+                                        </Badge>
+                                      ))}
+                                    </div>
+                                  </Card>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                        
+                        {/* Statistics */}
+                        <div className="mt-8 grid md:grid-cols-3 gap-6">
+                          {(section.content as any)?.statistics?.map((stat: any, index: number) => {
+                            const bgClass = index === 0 ? "bg-ufLightBlue" :
+                                           index === 1 ? "bg-ufLightOrange" : "bg-green-50";
+                            const textClass = index === 0 ? "text-ufBlue" :
+                                             index === 1 ? "text-ufOrange" : "text-green-600";
+                            
+                            return (
+                              <div key={index} className={`text-center p-4 ${bgClass} rounded-lg`} data-testid={`statistic-${index}`}>
+                                <div className={`text-2xl font-bold ${textClass}`}>{stat.value}</div>
+                                <div className="text-sm text-muted-foreground">{stat.label}</div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
                     )}
                   </div>
                 )}
