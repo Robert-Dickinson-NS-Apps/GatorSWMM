@@ -436,6 +436,130 @@ export default function Home() {
                               </ul>
                             </div>
                           </div>
+
+                          {/* Additional SWMM5 Technical Details */}
+                          <div className="mt-6 space-y-6">
+                            {/* Model Components Visualization */}
+                            <div className="bg-gradient-to-r from-indigo-50 via-purple-50 to-pink-50 dark:from-indigo-950 dark:via-purple-950 dark:to-pink-950 rounded-xl p-6 border border-indigo-200 dark:border-indigo-800">
+                              <div className="flex items-center space-x-3 mb-4">
+                                <div className="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center">
+                                  <Search className="w-5 h-5 text-white" />
+                                </div>
+                                <h4 className="text-xl font-semibold text-theme-secondary">SWMM5 Model Components</h4>
+                              </div>
+                              <div className="grid md:grid-cols-3 gap-6">
+                                <div className="bg-white/60 dark:bg-gray-800/60 rounded-lg p-4">
+                                  <div className="flex items-center space-x-2 mb-3">
+                                    <div className="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                                      <Mountain className="w-4 h-4 text-blue-600" />
+                                    </div>
+                                    <h5 className="font-semibold text-theme-secondary">Subcatchments</h5>
+                                  </div>
+                                  <p className="text-sm text-muted-foreground">Surface areas that collect rainfall and generate runoff to the drainage system</p>
+                                  <div className="mt-2 text-xs space-y-1">
+                                    <div>• Impervious/Pervious areas</div>
+                                    <div>• Depression storage</div>
+                                    <div>• Infiltration parameters</div>
+                                  </div>
+                                </div>
+                                
+                                <div className="bg-white/60 dark:bg-gray-800/60 rounded-lg p-4">
+                                  <div className="flex items-center space-x-2 mb-3">
+                                    <div className="w-8 h-8 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center">
+                                      <Waves className="w-4 h-4 text-orange-600" />
+                                    </div>
+                                    <h5 className="font-semibold text-theme-secondary">Conveyance Network</h5>
+                                  </div>
+                                  <p className="text-sm text-muted-foreground">Pipes, channels, and conduits that transport runoff through the system</p>
+                                  <div className="mt-2 text-xs space-y-1">
+                                    <div>• Flow routing methods</div>
+                                    <div>• Hydraulic controls</div>
+                                    <div>• Backwater effects</div>
+                                  </div>
+                                </div>
+                                
+                                <div className="bg-white/60 dark:bg-gray-800/60 rounded-lg p-4">
+                                  <div className="flex items-center space-x-2 mb-3">
+                                    <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                                      <Leaf className="w-4 h-4 text-green-600" />
+                                    </div>
+                                    <h5 className="font-semibold text-theme-secondary">Treatment Units</h5>
+                                  </div>
+                                  <p className="text-sm text-muted-foreground">Storage facilities and LID controls for flow management and water quality</p>
+                                  <div className="mt-2 text-xs space-y-1">
+                                    <div>• Detention ponds</div>
+                                    <div>• Green infrastructure</div>
+                                    <div>• Treatment devices</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* SWMM5 Analysis Capabilities */}
+                            <div className="grid md:grid-cols-2 gap-6">
+                              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950 dark:to-teal-950 rounded-lg p-5 border border-emerald-200 dark:border-emerald-800">
+                                <div className="flex items-center space-x-2 mb-3">
+                                  <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center">
+                                    <Droplets className="w-4 h-4 text-white" />
+                                  </div>
+                                  <h5 className="font-semibold text-emerald-800 dark:text-emerald-200">Hydraulic Analysis</h5>
+                                </div>
+                                <ul className="text-sm text-muted-foreground space-y-1">
+                                  <li>• Steady and unsteady flow routing</li>
+                                  <li>• Pressure flow and surcharging</li>
+                                  <li>• Flow control structures</li>
+                                  <li>• Real-time control operations</li>
+                                  <li>• Pump and orifice modeling</li>
+                                </ul>
+                              </div>
+                              
+                              <div className="bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-950 dark:to-purple-950 rounded-lg p-5 border border-violet-200 dark:border-violet-800">
+                                <div className="flex items-center space-x-2 mb-3">
+                                  <div className="w-8 h-8 bg-violet-600 rounded-lg flex items-center justify-center">
+                                    <Leaf className="w-4 h-4 text-white" />
+                                  </div>
+                                  <h5 className="font-semibold text-violet-800 dark:text-violet-200">Water Quality Modeling</h5>
+                                </div>
+                                <ul className="text-sm text-muted-foreground space-y-1">
+                                  <li>• Pollutant buildup and washoff</li>
+                                  <li>• Treatment device efficiency</li>
+                                  <li>• First flush effects</li>
+                                  <li>• BMPs performance evaluation</li>
+                                  <li>• Total Maximum Daily Loads (TMDL)</li>
+                                </ul>
+                              </div>
+                            </div>
+
+                            {/* Version 5.2.4 Features */}
+                            <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-950 dark:to-yellow-950 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
+                              <div className="flex items-center space-x-3 mb-4">
+                                <div className="w-10 h-10 bg-amber-600 rounded-full flex items-center justify-center">
+                                  <Download className="w-5 h-5 text-white" />
+                                </div>
+                                <h4 className="text-xl font-semibold text-theme-secondary">Latest in SWMM5 v5.2.4</h4>
+                              </div>
+                              <div className="grid md:grid-cols-2 gap-4">
+                                <div>
+                                  <h6 className="font-medium text-amber-800 dark:text-amber-200 mb-2">Enhanced Features</h6>
+                                  <ul className="text-sm text-muted-foreground space-y-1">
+                                    <li>• Improved LID modeling capabilities</li>
+                                    <li>• Enhanced real-time control</li>
+                                    <li>• Better groundwater interactions</li>
+                                    <li>• Advanced reporting options</li>
+                                  </ul>
+                                </div>
+                                <div>
+                                  <h6 className="font-medium text-amber-800 dark:text-amber-200 mb-2">Performance Improvements</h6>
+                                  <ul className="text-sm text-muted-foreground space-y-1">
+                                    <li>• Faster computation speeds</li>
+                                    <li>• Reduced memory usage</li>
+                                    <li>• Better numerical stability</li>
+                                    <li>• Enhanced error checking</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}
