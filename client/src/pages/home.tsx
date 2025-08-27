@@ -198,21 +198,23 @@ export default function Home() {
         <main className="flex-1 overflow-y-auto" data-testid="main-content">
           <div className="max-w-4xl mx-auto p-8">
             {/* Hero Section */}
-            <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-8 text-white mb-8" data-testid="hero-section" style={{background: `linear-gradient(to bottom right, var(--theme-secondary), hsl(from var(--theme-secondary) h s calc(l - 10%)))`}}>
-              <div className="flex items-start justify-between">
+            <div className="rounded-2xl p-8 mb-8 relative overflow-hidden" data-testid="hero-section" style={{background: `linear-gradient(135deg, var(--theme-secondary) 0%, hsl(from var(--theme-secondary) h s calc(l - 15%)) 100%)`}}>
+              {/* Dark overlay for text readability */}
+              <div className="absolute inset-0 bg-black/20"></div>
+              <div className="flex items-start justify-between relative z-10">
                 <div>
-                  <h1 className="text-4xl font-bold mb-4">Storm Droplets for SWMM5</h1>
-                  <p className="text-xl text-blue-100 mb-6 max-w-2xl">
+                  <h1 className="text-4xl font-bold mb-4 text-white drop-shadow-lg">Storm Droplets for SWMM5</h1>
+                  <p className="text-xl mb-6 max-w-2xl text-white/90 drop-shadow-md">
                     EPA's comprehensive dynamic rainfall-runoff simulation model used worldwide for urban drainage system analysis and design.
                   </p>
                   <div className="flex flex-wrap items-center gap-4">
-                    <Badge variant="outline" className="bg-white/10 border-white/20 text-white">
+                    <Badge variant="outline" className="bg-black/20 border-white/30 text-white backdrop-blur-sm">
                       First Developed: 1969-1971
                     </Badge>
-                    <Badge variant="outline" className="bg-white/10 border-white/20 text-white">
+                    <Badge variant="outline" className="bg-black/20 border-white/30 text-white backdrop-blur-sm">
                       Current Version: 5.2.4
                     </Badge>
-                    <Badge variant="outline" className="bg-white/10 border-white/20 text-white">
+                    <Badge variant="outline" className="bg-black/20 border-white/30 text-white backdrop-blur-sm">
                       Global Usage
                     </Badge>
                   </div>
