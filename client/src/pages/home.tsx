@@ -361,6 +361,82 @@ export default function Home() {
                             </TooltipContent>
                           </Tooltip> areas.
                         </p>
+
+                        {/* Enhanced SWMM5 Overview Graphics */}
+                        <div className="mt-8 space-y-6">
+                          {/* Water Cycle Visualization */}
+                          <div className="bg-gradient-to-r from-blue-50 via-cyan-50 to-blue-50 dark:from-blue-950 dark:via-cyan-950 dark:to-blue-950 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                            <div className="flex items-center space-x-3 mb-4">
+                              <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                                <Droplets className="w-5 h-5 text-white" />
+                              </div>
+                              <h4 className="text-xl font-semibold text-theme-secondary">Urban Water Cycle Modeling</h4>
+                            </div>
+                            <div className="grid md:grid-cols-4 gap-4">
+                              <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                                <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <Droplets className="w-6 h-6 text-blue-600" />
+                                </div>
+                                <h5 className="font-medium text-sm">Precipitation</h5>
+                                <p className="text-xs text-muted-foreground mt-1">Rainfall & Snow</p>
+                              </div>
+                              <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                                <div className="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <Mountain className="w-6 h-6 text-green-600" />
+                                </div>
+                                <h5 className="font-medium text-sm">Surface Runoff</h5>
+                                <p className="text-xs text-muted-foreground mt-1">Urban Drainage</p>
+                              </div>
+                              <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                                <div className="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <Waves className="w-6 h-6 text-orange-600" />
+                                </div>
+                                <h5 className="font-medium text-sm">Flow Routing</h5>
+                                <p className="text-xs text-muted-foreground mt-1">Pipe Networks</p>
+                              </div>
+                              <div className="text-center p-4 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                                <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-2">
+                                  <Leaf className="w-6 h-6 text-purple-600" />
+                                </div>
+                                <h5 className="font-medium text-sm">Water Quality</h5>
+                                <p className="text-xs text-muted-foreground mt-1">Pollutant Transport</p>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* SWMM5 Benefits */}
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 rounded-lg p-5 border border-green-200 dark:border-green-800">
+                              <div className="flex items-center space-x-2 mb-3">
+                                <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                                  <Leaf className="w-4 h-4 text-white" />
+                                </div>
+                                <h5 className="font-semibold text-green-800 dark:text-green-200">Environmental Benefits</h5>
+                              </div>
+                              <ul className="text-sm text-muted-foreground space-y-1">
+                                <li>• Reduces urban flooding risks</li>
+                                <li>• Improves water quality management</li>
+                                <li>• Supports green infrastructure design</li>
+                                <li>• Enables sustainable stormwater solutions</li>
+                              </ul>
+                            </div>
+                            
+                            <div className="bg-gradient-to-br from-theme-light-primary to-orange-50 dark:from-orange-950 dark:to-red-950 rounded-lg p-5 border border-theme-primary/20">
+                              <div className="flex items-center space-x-2 mb-3">
+                                <div className="w-8 h-8 bg-theme-primary rounded-lg flex items-center justify-center">
+                                  <Search className="w-4 h-4 text-white" />
+                                </div>
+                                <h5 className="font-semibold text-theme-secondary">Engineering Applications</h5>
+                              </div>
+                              <ul className="text-sm text-muted-foreground space-y-1">
+                                <li>• Urban drainage system design</li>
+                                <li>• Combined sewer overflow analysis</li>
+                                <li>• Best Management Practice evaluation</li>
+                                <li>• Regulatory compliance modeling</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     )}
 
@@ -404,6 +480,87 @@ export default function Home() {
                                 <p className="text-sm text-muted-foreground">{app.description}</p>
                               </Card>
                             ))}
+                          </div>
+                        </div>
+
+                        {/* Enhanced SWMM5 Information Section */}
+                        <div className="mt-8 space-y-6">
+                          {/* SWMM5 Core Features */}
+                          <div className="bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-950 dark:to-cyan-950 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                            <div className="flex items-center space-x-3 mb-4">
+                              <div className="w-10 h-10 bg-theme-primary rounded-full flex items-center justify-center">
+                                <Waves className="w-5 h-5 text-white" />
+                              </div>
+                              <h4 className="text-xl font-semibold text-theme-secondary">SWMM5 v5.2.4 - Advanced Stormwater Modeling</h4>
+                            </div>
+                            <p className="text-muted-foreground leading-relaxed mb-4">
+                              The Storm Water Management Model (SWMM5) is a dynamic rainfall-runoff simulation model used worldwide for planning, 
+                              analysis and design of stormwater management systems in urban areas. This comprehensive tool helps engineers and 
+                              planners design effective drainage systems and assess water quality impacts.
+                            </p>
+                            <div className="grid md:grid-cols-3 gap-4 mt-4">
+                              <div className="flex items-center space-x-2 text-sm">
+                                <div className="w-6 h-6 bg-blue-100 dark:bg-blue-900 rounded flex items-center justify-center">
+                                  <Droplets className="w-3 h-3 text-blue-600" />
+                                </div>
+                                <span>Rainfall-Runoff Analysis</span>
+                              </div>
+                              <div className="flex items-center space-x-2 text-sm">
+                                <div className="w-6 h-6 bg-green-100 dark:bg-green-900 rounded flex items-center justify-center">
+                                  <Mountain className="w-3 h-3 text-green-600" />
+                                </div>
+                                <span>Urban Hydrology</span>
+                              </div>
+                              <div className="flex items-center space-x-2 text-sm">
+                                <div className="w-6 h-6 bg-purple-100 dark:bg-purple-900 rounded flex items-center justify-center">
+                                  <Leaf className="w-3 h-3 text-purple-600" />
+                                </div>
+                                <span>Water Quality Modeling</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Technical Capabilities */}
+                          <div className="grid md:grid-cols-2 gap-6">
+                            <div className="bg-gradient-to-br from-theme-light-primary to-orange-50 dark:from-orange-950 dark:to-red-950 rounded-lg p-5 border border-theme-primary/20">
+                              <div className="flex items-center space-x-2 mb-3">
+                                <div className="w-8 h-8 bg-theme-primary rounded-lg flex items-center justify-center">
+                                  <Search className="w-4 h-4 text-white" />
+                                </div>
+                                <h5 className="font-semibold text-theme-secondary">Hydrodynamic Routing</h5>
+                              </div>
+                              <p className="text-sm text-muted-foreground">
+                                SWMM5 uses sophisticated algorithms to route flows through pipe networks, 
+                                accounting for backwater effects, surcharging, and pressure flow conditions.
+                              </p>
+                            </div>
+                            
+                            <div className="bg-gradient-to-br from-theme-light-secondary to-blue-50 dark:from-blue-950 dark:to-indigo-950 rounded-lg p-5 border border-theme-secondary/20">
+                              <div className="flex items-center space-x-2 mb-3">
+                                <div className="w-8 h-8 bg-theme-secondary rounded-lg flex items-center justify-center">
+                                  <Waves className="w-4 h-4 text-white" />
+                                </div>
+                                <h5 className="font-semibold text-theme-primary">LID Controls</h5>
+                              </div>
+                              <p className="text-sm text-muted-foreground">
+                                Comprehensive Low Impact Development (LID) modeling including rain gardens, 
+                                permeable pavement, and green infrastructure practices.
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Usage Statistics */}
+                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 rounded-xl p-6 border border-green-200 dark:border-green-800">
+                            <div className="text-center">
+                              <div className="flex items-center justify-center space-x-2 mb-3">
+                                <Leaf className="w-6 h-6 text-green-600" />
+                                <h4 className="text-lg font-semibold text-green-800 dark:text-green-200">Global Impact</h4>
+                              </div>
+                              <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+                                SWMM5 is used by thousands of engineers worldwide for stormwater management, 
+                                helping cities reduce flooding risks and improve water quality in urban watersheds.
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
