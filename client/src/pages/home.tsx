@@ -764,17 +764,33 @@ export default function Home() {
                           </div>
 
                           {/* Usage Statistics */}
-                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 rounded-xl p-6 border border-green-200 dark:border-green-800">
-                            <div className="text-center">
+                          <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950 rounded-xl border border-green-200 dark:border-green-800 overflow-hidden">
+                            <button
+                              onClick={() => toggleProcess('global-impact')}
+                              className="w-full p-6 text-center hover:bg-green-100 dark:hover:bg-green-900 transition-colors"
+                              data-testid="global-impact-section"
+                            >
                               <div className="flex items-center justify-center space-x-2 mb-3">
                                 <Leaf className="w-6 h-6 text-green-600" />
                                 <h4 className="text-lg font-semibold text-green-800 dark:text-green-200">Global Impact</h4>
+                                {expandedProcesses.has('global-impact') ? (
+                                  <ChevronUp className="w-4 h-4 text-green-600" />
+                                ) : (
+                                  <ChevronDown className="w-4 h-4 text-green-600" />
+                                )}
                               </div>
                               <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
                                 SWMM5 is used by thousands of engineers worldwide for stormwater management, 
                                 helping cities reduce flooding risks and improve water quality in urban watersheds.
                               </p>
-                            </div>
+                            </button>
+                            {expandedProcesses.has('global-impact') && (
+                              <div className="px-6 pb-6">
+                                <div className="bg-white/70 dark:bg-gray-800/70 rounded p-4 text-sm text-muted-foreground leading-relaxed border border-green-300 dark:border-green-700">
+                                  SWMM5 is used by thousands of engineers worldwide for stormwater management, helping cities reduce flooding risks and improve water quality in urban watersheds. According to Google Scholar, a search for 'SWMM' returns about 56,700 results, the SWMM5 User's Manual by L.A. Rossman (2010) has been cited over 2,000 times, and the SWMM4 User's Manual by W.C. Huber and R.E. Dickinson (1988) has been cited 839 times, demonstrating its significant influence in the field of stormwater modeling and research.
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
