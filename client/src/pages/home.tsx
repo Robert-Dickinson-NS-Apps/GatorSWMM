@@ -168,7 +168,7 @@ export default function Home() {
                   data-testid="button-download"
                 >
                   <Download className="w-3 h-3" />
-                  <span>Download SWMM 5.2.3</span>
+                  <span>Download SWMM 5.2.4</span>
                 </Button>
               </div>
             </div>
