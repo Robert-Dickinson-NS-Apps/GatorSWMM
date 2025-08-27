@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { ThemeSelector } from "@/components/ui/theme-selector";
 import { useTheme } from "@/hooks/use-theme";
-import { Search, Droplets, Waves, Mountain, Leaf, ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download } from "lucide-react";
+import { Search, Droplets, Waves, Mountain, Leaf, ChevronUp, ChevronDown, Play, CheckCircle, Circle, ExternalLink, Download, Gamepad2 } from "lucide-react";
 import type { SwmmSection } from "@shared/schema";
 
 const iconMap = { Droplets, Waves, Mountain, Leaf };
@@ -73,7 +74,7 @@ export default function Home() {
       <header className="bg-white border-b border-border shadow-sm sticky top-0 z-50" data-testid="header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-6">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-theme-primary rounded-lg flex items-center justify-center">
                   <ThemeIcon className="text-white w-4 h-4" />
@@ -81,6 +82,22 @@ export default function Home() {
                 <h1 className="text-xl font-bold text-theme-secondary">SWMM5Wiki</h1>
               </div>
               <span className="text-sm text-muted-foreground">Interactive Storm Droplets Management Guide</span>
+              
+              {/* Navigation */}
+              <div className="flex items-center space-x-4">
+                <Link href="/">
+                  <Button variant="ghost" size="sm" className="text-theme-secondary hover:bg-theme-light-primary">
+                    <Circle className="w-4 h-4 mr-2" />
+                    Learn
+                  </Button>
+                </Link>
+                <Link href="/game">
+                  <Button variant="ghost" size="sm" className="text-theme-secondary hover:bg-theme-light-secondary">
+                    <Gamepad2 className="w-4 h-4 mr-2" />
+                    Play Game
+                  </Button>
+                </Link>
+              </div>
             </div>
             
             <div className="flex-1 max-w-md mx-8">

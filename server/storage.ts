@@ -1,4 +1,4 @@
-import { type User, type InsertUser, type SwmmSection, type InsertSwmmSection, type GlossaryTerm, type InsertGlossaryTerm, type UserProgress, type InsertUserProgress } from "@shared/schema";
+import { type User, type InsertUser, type SwmmSection, type InsertSwmmSection, type GlossaryTerm, type InsertGlossaryTerm, type UserProgress, type InsertUserProgress, type GameScenario, type InsertGameScenario, type GameProgress, type InsertGameProgress } from "@shared/schema";
 import { randomUUID } from "crypto";
 
 export interface IStorage {
@@ -16,6 +16,13 @@ export interface IStorage {
   
   getUserProgress(userId: string): Promise<UserProgress[]>;
   updateUserProgress(progress: InsertUserProgress): Promise<UserProgress>;
+  
+  getGameScenarios(): Promise<GameScenario[]>;
+  getGameScenario(id: string): Promise<GameScenario | undefined>;
+  getGameScenariosByCategory(category: string): Promise<GameScenario[]>;
+  
+  getGameProgress(userId: string): Promise<GameProgress[]>;
+  updateGameProgress(progress: InsertGameProgress): Promise<GameProgress>;
 }
 
 export class MemStorage implements IStorage {
@@ -23,16 +30,21 @@ export class MemStorage implements IStorage {
   private sections: Map<string, SwmmSection>;
   private glossaryTerms: Map<string, GlossaryTerm>;
   private userProgress: Map<string, UserProgress>;
+  private gameScenarios: Map<string, GameScenario>;
+  private gameProgress: Map<string, GameProgress>;
 
   constructor() {
     this.users = new Map();
     this.sections = new Map();
     this.glossaryTerms = new Map();
     this.userProgress = new Map();
+    this.gameScenarios = new Map();
+    this.gameProgress = new Map();
     
     // Initialize with SWMM5 content
     this.initializeSWMMContent();
     this.initializeGlossary();
+    this.initializeGameScenarios();
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -115,6 +127,178 @@ export class MemStorage implements IStorage {
       this.userProgress.set(id, progress);
       return progress;
     }
+  }
+
+  async getGameScenarios(): Promise<GameScenario[]> {
+    return Array.from(this.gameScenarios.values()).sort((a, b) => a.order - b.order);
+  }
+
+  async getGameScenario(id: string): Promise<GameScenario | undefined> {
+    return this.gameScenarios.get(id);
+  }
+
+  async getGameScenariosByCategory(category: string): Promise<GameScenario[]> {
+    return Array.from(this.gameScenarios.values())
+      .filter(scenario => scenario.category === category)
+      .sort((a, b) => a.order - b.order);
+  }
+
+  async getGameProgress(userId: string): Promise<GameProgress[]> {
+    return Array.from(this.gameProgress.values()).filter(p => p.userId === userId);
+  }
+
+  async updateGameProgress(insertProgress: InsertGameProgress): Promise<GameProgress> {
+    const existing = Array.from(this.gameProgress.values()).find(p => 
+      p.userId === insertProgress.userId && p.scenarioId === insertProgress.scenarioId
+    );
+    
+    if (existing) {
+      existing.score = insertProgress.score || 0;
+      existing.completed = insertProgress.completed || false;
+      existing.attempts = (existing.attempts || 0) + 1;
+      existing.completedAt = insertProgress.completed ? new Date() : null;
+      this.gameProgress.set(existing.id, existing);
+      return existing;
+    } else {
+      const id = randomUUID();
+      const progress: GameProgress = { 
+        ...insertProgress, 
+        id,
+        userId: insertProgress.userId || null,
+        scenarioId: insertProgress.scenarioId || null,
+        score: insertProgress.score || 0,
+        completed: insertProgress.completed || false,
+        attempts: 1,
+        completedAt: insertProgress.completed ? new Date() : null
+      };
+      this.gameProgress.set(id, progress);
+      return progress;
+    }
+  }
+
+  private initializeGameScenarios() {
+    const scenarios = [
+      {
+        title: "Urban Runoff Basics",
+        description: "Learn how rainfall creates runoff in urban areas and identify key factors affecting stormwater flow.",
+        difficulty: "beginner",
+        category: "hydrology",
+        order: 1,
+        scenario: {
+          type: "multiple_choice",
+          situation: "A 2-inch rainfall event occurs over a small urban watershed. The area has 60% impervious surfaces (roads, buildings, parking lots) and 40% pervious surfaces (parks, lawns).",
+          question: "Which factor will have the GREATEST impact on the amount of surface runoff generated?",
+          options: [
+            {
+              id: "a",
+              text: "The percentage of impervious surfaces",
+              correct: true,
+              explanation: "Correct! Impervious surfaces prevent infiltration, causing most rainfall to become surface runoff. With 60% impervious coverage, a significant portion of the 2-inch rainfall will flow directly to storm drains."
+            },
+            {
+              id: "b", 
+              text: "The total rainfall amount",
+              correct: false,
+              explanation: "While rainfall amount is important, the surface type determines how much becomes runoff. Even heavy rain on pervious surfaces can infiltrate."
+            },
+            {
+              id: "c",
+              text: "The slope of the terrain", 
+              correct: false,
+              explanation: "Slope affects flow velocity and timing, but doesn't significantly change the total volume of runoff generated."
+            },
+            {
+              id: "d",
+              text: "The air temperature",
+              correct: false,
+              explanation: "Temperature has minimal direct effect on runoff generation during liquid precipitation events."
+            }
+          ],
+          learningObjectives: [
+            "Understand the relationship between surface types and runoff generation",
+            "Identify the primary factors controlling urban stormwater volumes",
+            "Recognize why impervious surfaces are critical in urban hydrology"
+          ]
+        }
+      },
+      {
+        title: "Infiltration Process",
+        description: "Understand how SWMM models water infiltration into soil and the factors that control this process.",
+        difficulty: "intermediate", 
+        category: "hydrology",
+        order: 2,
+        scenario: {
+          type: "scenario_analysis",
+          situation: "You're modeling a residential area with clay soil. Recent development increased impervious cover from 30% to 70%. A neighbor complains about increased flooding in their yard after storms.",
+          question: "Using SWMM's infiltration modeling, explain why flooding increased and suggest two solutions.",
+          correctAnswers: [
+            "Reduced infiltration area due to more impervious surfaces",
+            "Higher peak flows due to faster runoff from impervious areas", 
+            "Less time for soil to absorb water",
+            "Clay soil has low infiltration capacity"
+          ],
+          solutions: [
+            "Install rain gardens or bioretention areas",
+            "Use permeable pavement for driveways/walkways",
+            "Add detention ponds to store excess runoff",
+            "Implement green roofs to reduce runoff"
+          ],
+          learningObjectives: [
+            "Apply SWMM infiltration concepts to real-world problems",
+            "Understand the impact of development on hydrology",
+            "Identify appropriate stormwater management solutions"
+          ]
+        }
+      },
+      {
+        title: "Pipe Network Design",
+        description: "Design a storm drain network to handle peak flows using SWMM's hydraulic routing capabilities.",
+        difficulty: "advanced",
+        category: "hydraulics", 
+        order: 3,
+        scenario: {
+          type: "design_challenge",
+          situation: "Design a pipe network for a 10-acre commercial development. Peak inflow is 15 CFS. You have 500 feet to the outfall with 8 feet of elevation drop.",
+          parameters: {
+            peakFlow: 15, // CFS
+            distance: 500, // feet  
+            elevationDrop: 8, // feet
+            area: 10 // acres
+          },
+          question: "What minimum pipe diameter would you specify to convey this flow without surcharging?",
+          hints: [
+            "Use Manning's equation for pipe flow calculations",
+            "Assume Manning's n = 0.013 for concrete pipes",
+            "Consider velocity constraints (typically 3-15 ft/s)",
+            "Account for entrance and exit losses"
+          ],
+          solution: {
+            minDiameter: 18, // inches
+            velocity: 4.2, // ft/s
+            explanation: "An 18-inch diameter pipe provides adequate capacity with reasonable velocity. Smaller pipes would cause excessive velocity or surcharging."
+          },
+          learningObjectives: [
+            "Apply Manning's equation for pipe sizing",
+            "Understand hydraulic design constraints",
+            "Use SWMM for pipe network analysis"
+          ]
+        }
+      }
+    ];
+
+    scenarios.forEach(scenario => {
+      const id = randomUUID();
+      const gameScenario: GameScenario = { 
+        id,
+        title: scenario.title,
+        description: scenario.description,
+        scenario: scenario.scenario,
+        difficulty: scenario.difficulty,
+        category: scenario.category,
+        order: scenario.order
+      };
+      this.gameScenarios.set(id, gameScenario);
+    });
   }
 
   private initializeSWMMContent() {

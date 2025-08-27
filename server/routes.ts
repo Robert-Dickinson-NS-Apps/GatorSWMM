@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertSectionSchema, insertGlossaryTermSchema, insertUserProgressSchema } from "@shared/schema";
+import { insertSectionSchema, insertGlossaryTermSchema, insertUserProgressSchema, insertGameProgressSchema } from "@shared/schema";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // SWMM Sections routes
@@ -85,6 +85,57 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(progress);
     } catch (error) {
       res.status(400).json({ message: "Invalid progress data" });
+    }
+  });
+
+  // Game scenarios routes
+  app.get("/api/game/scenarios", async (req, res) => {
+    try {
+      const scenarios = await storage.getGameScenarios();
+      res.json(scenarios);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch game scenarios" });
+    }
+  });
+
+  app.get("/api/game/scenarios/:id", async (req, res) => {
+    try {
+      const scenario = await storage.getGameScenario(req.params.id);
+      if (!scenario) {
+        return res.status(404).json({ message: "Scenario not found" });
+      }
+      res.json(scenario);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch scenario" });
+    }
+  });
+
+  app.get("/api/game/scenarios/category/:category", async (req, res) => {
+    try {
+      const scenarios = await storage.getGameScenariosByCategory(req.params.category);
+      res.json(scenarios);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch scenarios by category" });
+    }
+  });
+
+  // Game progress routes
+  app.get("/api/game/progress/:userId", async (req, res) => {
+    try {
+      const progress = await storage.getGameProgress(req.params.userId);
+      res.json(progress);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch game progress" });
+    }
+  });
+
+  app.post("/api/game/progress", async (req, res) => {
+    try {
+      const validatedData = insertGameProgressSchema.parse(req.body);
+      const progress = await storage.updateGameProgress(validatedData);
+      res.json(progress);
+    } catch (error) {
+      res.status(400).json({ message: "Invalid game progress data" });
     }
   });
 

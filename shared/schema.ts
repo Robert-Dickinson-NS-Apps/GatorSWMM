@@ -34,6 +34,26 @@ export const userProgress = pgTable("user_progress", {
   completedAt: timestamp("completed_at"),
 });
 
+export const gameScenarios = pgTable("game_scenarios", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  scenario: json("scenario").notNull(),
+  difficulty: text("difficulty").notNull(), // 'beginner', 'intermediate', 'advanced'
+  category: text("category").notNull(), // 'hydrology', 'hydraulics', 'water-quality', 'system-design'
+  order: integer("order").notNull(),
+});
+
+export const gameProgress = pgTable("game_progress", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  userId: varchar("user_id").references(() => users.id),
+  scenarioId: varchar("scenario_id").references(() => gameScenarios.id),
+  score: integer("score").default(0),
+  completed: boolean("completed").default(false),
+  attempts: integer("attempts").default(0),
+  completedAt: timestamp("completed_at"),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -53,6 +73,15 @@ export const insertUserProgressSchema = createInsertSchema(userProgress).omit({
   completedAt: true,
 });
 
+export const insertGameScenarioSchema = createInsertSchema(gameScenarios).omit({
+  id: true,
+});
+
+export const insertGameProgressSchema = createInsertSchema(gameProgress).omit({
+  id: true,
+  completedAt: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type SwmmSection = typeof swmmSections.$inferSelect;
@@ -61,3 +90,7 @@ export type GlossaryTerm = typeof glossaryTerms.$inferSelect;
 export type InsertGlossaryTerm = z.infer<typeof insertGlossaryTermSchema>;
 export type UserProgress = typeof userProgress.$inferSelect;
 export type InsertUserProgress = z.infer<typeof insertUserProgressSchema>;
+export type GameScenario = typeof gameScenarios.$inferSelect;
+export type InsertGameScenario = z.infer<typeof insertGameScenarioSchema>;
+export type GameProgress = typeof gameProgress.$inferSelect;
+export type InsertGameProgress = z.infer<typeof insertGameProgressSchema>;
