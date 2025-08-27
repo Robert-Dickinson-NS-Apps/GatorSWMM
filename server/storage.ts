@@ -107,6 +107,7 @@ export class MemStorage implements IStorage {
       const progress: UserProgress = { 
         ...insertProgress, 
         id,
+        completed: insertProgress.completed || false,
         completedAt: insertProgress.completed ? new Date() : null
       };
       this.userProgress.set(id, progress);
@@ -258,7 +259,7 @@ export class MemStorage implements IStorage {
             },
             {
               year: "2023",
-              title: "SWMM Version 5.2.3 (Current)",
+              title: "SWMM Version 5.2.4 (Current)",
               description: "Latest stable release with enhanced LID controls and climate change tools",
               era: "Active Development",
               highlights: ["LID Enhanced", "Climate Ready", "FEMA Approved"],
@@ -336,7 +337,11 @@ export class MemStorage implements IStorage {
 
     terms.forEach(term => {
       const id = randomUUID();
-      const glossaryTerm: GlossaryTerm = { ...term, id };
+      const glossaryTerm: GlossaryTerm = { 
+        ...term, 
+        id,
+        category: term.category || null
+      };
       this.glossaryTerms.set(id, glossaryTerm);
     });
   }

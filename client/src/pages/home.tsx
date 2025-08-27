@@ -35,7 +35,7 @@ export default function Home() {
   };
 
   const markSectionCompleted = (slug: string) => {
-    setCompletedSections(prev => new Set([...prev, slug]));
+    setCompletedSections(prev => new Set([...Array.from(prev), slug]));
   };
 
   const progressPercent = Math.round((completedSections.size / sections.length) * 100) || 25;
@@ -191,7 +191,7 @@ export default function Home() {
                       First Developed: 1969-1971
                     </Badge>
                     <Badge variant="outline" className="bg-white/10 border-white/20 text-white">
-                      Current Version: 5.2.3
+                      Current Version: 5.2.4
                     </Badge>
                     <Badge variant="outline" className="bg-white/10 border-white/20 text-white">
                       Global Usage
@@ -254,12 +254,12 @@ export default function Home() {
                 {/* Section Content */}
                 {expandedSections.has(section.slug) && (
                   <div className="p-6">
-                    {section.content.type === "overview" && (
+                    {(section.content as any)?.type === "overview" && (
                       <div>
                         <p className="text-lg leading-relaxed mb-4">
                           The United States Environmental Protection Agency (EPA){" "}
                           <GlossaryTerm 
-                            term="Storm Droplets Management Model (SWMM)" 
+                            term="Storm Water Management Model (SWMM)" 
                             definition="A dynamic rainfall-runoff-subsurface runoff simulation model for urban drainage systems"
                             className="font-semibold text-ufBlue"
                           />{" "}
@@ -269,7 +269,7 @@ export default function Home() {
                         <div className="bg-ufLightBlue rounded-lg p-6 mb-6">
                           <h3 className="text-lg font-semibold text-ufBlue mb-3">Key Characteristics</h3>
                           <div className="grid md:grid-cols-2 gap-4">
-                            {section.content.characteristics?.map((char: any, index: number) => (
+                            {(section.content as any)?.characteristics?.map((char: any, index: number) => (
                               <div key={index} className="flex items-start space-x-3">
                                 <div className="w-8 h-8 rounded-full bg-ufOrange/10 flex items-center justify-center flex-shrink-0">
                                   <Droplets className="w-4 h-4 text-ufOrange" />
@@ -310,13 +310,13 @@ export default function Home() {
                       </div>
                     )}
 
-                    {section.content.type === "program_description" && (
+                    {(section.content as any)?.type === "program_description" && (
                       <div>
                         <div className="grid lg:grid-cols-2 gap-8 mb-8">
                           <div>
                             <h3 className="text-lg font-semibold text-ufBlue mb-4">Hydrologic Processes</h3>
                             <div className="space-y-3">
-                              {section.content.hydrologicProcesses?.map((process: string, index: number) => (
+                              {(section.content as any)?.hydrologicProcesses?.map((process: string, index: number) => (
                                 <div key={index} className="flex items-center space-x-3 p-3 bg-ufLightBlue rounded-lg">
                                   <Droplets className="w-4 h-4 text-ufOrange" />
                                   <span>{process}</span>
@@ -328,7 +328,7 @@ export default function Home() {
                           <div>
                             <h3 className="text-lg font-semibold text-ufBlue mb-4">Hydraulic Capabilities</h3>
                             <div className="space-y-3">
-                              {section.content.hydraulicCapabilities?.map((capability: string, index: number) => (
+                              {(section.content as any)?.hydraulicCapabilities?.map((capability: string, index: number) => (
                                 <div key={index} className="flex items-center space-x-3 p-3 bg-ufLightOrange rounded-lg">
                                   <Droplets className="w-4 h-4 text-ufBlue" />
                                   <span>{capability}</span>
@@ -341,7 +341,7 @@ export default function Home() {
                         <div>
                           <h3 className="text-lg font-semibold text-ufBlue mb-4">Typical Applications</h3>
                           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {section.content.applications?.map((app: any, index: number) => (
+                            {(section.content as any)?.applications?.map((app: any, index: number) => (
                               <Card key={index} className="p-4 hover:shadow-md transition-shadow">
                                 <div className="flex items-center space-x-2 mb-2">
                                   <Droplets className="w-4 h-4 text-ufOrange" />
@@ -355,10 +355,10 @@ export default function Home() {
                       </div>
                     )}
 
-                    {section.content.type === "timeline" && (
+                    {(section.content as any)?.type === "timeline" && (
                       <Timeline 
-                        items={section.content.timelineItems} 
-                        statistics={section.content.statistics}
+                        items={(section.content as any)?.timelineItems} 
+                        statistics={(section.content as any)?.statistics}
                         data-testid="timeline-component"
                       />
                     )}
