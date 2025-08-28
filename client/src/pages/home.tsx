@@ -79,9 +79,9 @@ export default function Home() {
                 <div className="w-8 h-8 bg-theme-primary rounded-lg flex items-center justify-center">
                   <ThemeIcon className="text-white w-4 h-4" />
                 </div>
-                <h1 className="text-xl font-bold text-theme-secondary">SWMM5Wiki</h1>
+                <h1 className="text-xl font-bold text-theme-secondary">SWMM5Wiki & ICM</h1>
               </div>
-              <span className="text-sm text-muted-foreground">Interactive Storm Droplets Management Guide</span>
+              <span className="text-sm text-muted-foreground">Interactive SWMM5 & ICM Urban Drainage Guide</span>
               
               {/* Navigation */}
               <div className="flex items-center space-x-4">
