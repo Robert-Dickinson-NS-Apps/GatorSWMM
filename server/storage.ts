@@ -429,15 +429,15 @@ export class MemStorage implements IStorage {
         }
       },
       {
-        title: "SWMM5 Dynamic Wave Routing Advanced Implementation",
-        description: "Master the most sophisticated hydraulic routing method in SWMM5 for complex flow conditions.",
+        title: "Dynamic Wave Routing Advanced Implementation",
+        description: "Master the most sophisticated hydraulic routing method in SWMM for complex flow conditions.",
         difficulty: "expert",
         category: "hydraulics",
         order: 8,
         scenario: {
           type: "scenario_analysis",
           situation: "You're modeling a 2-mile trunk sewer system with multiple pump stations, complex storage tanks, and varying pipe slopes. The system experiences rapid flow transitions, backwater effects, and periodic surcharging during storm events.",
-          question: "Analyze the numerical challenges of implementing dynamic wave routing for this system. Discuss the impact of the Courant-Friedrichs-Lewy (CFL) condition, grid convergence, and how SWMM5 handles the transition from free surface to pressurized flow. What calibration strategies would you use for friction factors and minor losses?",
+          question: "Analyze the numerical challenges of implementing dynamic wave routing for this system. Discuss the impact of the Courant-Friedrichs-Lewy (CFL) condition, grid convergence, and how SWMM handles the transition from free surface to pressurized flow. What calibration strategies would you use for friction factors and minor losses?",
           correctAnswers: ["cfl condition", "courant number", "grid convergence", "pressurized flow", "friction factors", "minor losses", "manning roughness", "time step"],
           hints: [
             "Consider numerical stability requirements for explicit schemes",
@@ -445,16 +445,16 @@ export class MemStorage implements IStorage {
             "Consider how SWMM5 switches between flow regimes",
             "Think about parameter sensitivity and calibration data needs"
           ],
-          solution: "Key considerations: (1) CFL condition requires time steps ≤ 0.5×(Δx/V+c) where V is velocity and c is wave celerity, (2) Grid convergence testing ensures spatial discretization doesn't affect results, (3) SWMM5 uses slot model for pressurization maintaining Saint-Venant framework, (4) Friction calibration requires flow/depth measurements at multiple locations, (5) Minor losses (K-factors) significantly affect results in complex systems, (6) Sensitivity analysis identifies critical parameters, (7) Multi-event calibration captures different flow regimes.",
+          solution: "Key considerations: (1) CFL condition requires time steps ≤ 0.5×(Δx/V+c) where V is velocity and c is wave celerity, (2) Grid convergence testing ensures spatial discretization doesn't affect results, (3) SWMM uses slot model for pressurization maintaining Saint-Venant framework, (4) Friction calibration requires flow/depth measurements at multiple locations, (5) Minor losses (K-factors) significantly affect results in complex systems, (6) Sensitivity analysis identifies critical parameters, (7) Multi-event calibration captures different flow regimes.",
           learningObjectives: [
-            "Master advanced numerical methods in SWMM5",
+            "Master advanced numerical methods in SWMM",
             "Understand computational fluid dynamics principles",
             "Apply sophisticated calibration techniques"
           ]
         }
       },
       {
-        title: "SWMM5 Water Quality Advanced Kinetics",
+        title: "Water Quality Advanced Kinetics",
         description: "Master sophisticated pollutant fate and transport modeling with complex biochemical processes.",
         difficulty: "expert", 
         category: "water quality",
@@ -462,7 +462,7 @@ export class MemStorage implements IStorage {
         scenario: {
           type: "multiple_choice",
           situation: "You're modeling a combined sewer system where organic matter undergoes biochemical transformations. The model must account for BOD decay, nitrification, denitrification, and sediment-pollutant interactions during varying residence times.",
-          question: "What is the MOST critical factor when modeling first-order decay kinetics for multiple interacting pollutants in SWMM5?",
+          question: "What is the MOST critical factor when modeling first-order decay kinetics for multiple interacting pollutants in SWMM?",
           options: [
             {
               id: "a",
@@ -490,15 +490,15 @@ export class MemStorage implements IStorage {
             }
           ],
           learningObjectives: [
-            "Master biochemical kinetics in SWMM5",
+            "Master biochemical kinetics in SWMM",
             "Understand temperature effects on pollutant fate",
             "Apply stoichiometric relationships in water quality modeling"
           ]
         }
       },
       {
-        title: "SWMM5 Groundwater-Surface Water Interaction",
-        description: "Model complex groundwater interactions with sophisticated aquifer representation in SWMM5.",
+        title: "Groundwater-Surface Water Interaction",
+        description: "Model complex groundwater interactions with sophisticated aquifer representation in SWMM.",
         difficulty: "expert",
         category: "hydrology",
         order: 10,
@@ -514,7 +514,7 @@ export class MemStorage implements IStorage {
           },
           question: "Design the groundwater component including aquifer parameters, moisture accounting, and calibration strategy. How would you handle the nonlinear relationship between groundwater depth and lateral flow?",
           hints: [
-            "Consider groundwater flow equation parameters in SWMM5",
+            "Consider groundwater flow equation parameters in SWMM",
             "Think about moisture accounting and evapotranspiration",
             "Consider seasonal calibration and validation approaches",
             "Account for urban impacts on natural groundwater flow"
@@ -527,17 +527,17 @@ export class MemStorage implements IStorage {
               groundwater_flow_coeff: "0.001-0.1"
             },
             calibration_strategy: "Multi-season approach with water table monitoring",
-            explanation: "Use SWMM5's 3-layer groundwater model with soil-specific porosity (sandy: 0.45, clay: 0.25), field capacity, and conductivity. Calibrate groundwater flow coefficient using baseflow measurements. Account for seasonal ET variations and urban heat island effects. Validate against water table measurements at multiple monitoring wells."
+            explanation: "Use SWMM's 3-layer groundwater model with soil-specific porosity (sandy: 0.45, clay: 0.25), field capacity, and conductivity. Calibrate groundwater flow coefficient using baseflow measurements. Account for seasonal ET variations and urban heat island effects. Validate against water table measurements at multiple monitoring wells."
           },
           learningObjectives: [
-            "Master SWMM5 groundwater modeling capabilities",
+            "Master SWMM groundwater modeling capabilities",
             "Understand subsurface hydrology principles",
             "Apply groundwater calibration techniques"
           ]
         }
       },
       {
-        title: "SWMM5 Advanced LID Performance Modeling",
+        title: "Advanced LID Performance Modeling",
         description: "Optimize complex LID treatment trains with detailed performance modeling and cost-effectiveness analysis.",
         difficulty: "expert",
         category: "green infrastructure",
@@ -555,22 +555,22 @@ export class MemStorage implements IStorage {
           ],
           solution: "Modeling approach: (1) Configure treatment train with series connections for optimal pollutant removal, (2) Apply time-dependent clogging factors reducing infiltration rates (bioretention: 50% in 5 years, permeable pavement: 70% in 3 years), (3) Model seasonal performance variations with temperature-dependent biological processes, (4) Calculate cumulative removal efficiency accounting for pollutant interactions, (5) Include maintenance costs and performance restoration cycles, (6) Validate with long-term monitoring data and adjust parameters based on observed performance degradation, (7) Optimize configuration using benefit-cost analysis.",
           learningObjectives: [
-            "Master advanced LID modeling in SWMM5",
+            "Master advanced LID modeling in SWMM",
             "Understand long-term performance prediction", 
             "Apply life-cycle cost analysis to green infrastructure"
           ]
         }
       },
       {
-        title: "SWMM5 Extreme Event Modeling and Uncertainty Analysis",
+        title: "Extreme Event Modeling and Uncertainty Analysis",
         description: "Model extreme precipitation events with comprehensive uncertainty quantification and risk assessment.",
         difficulty: "expert",
         category: "climate adaptation",
         order: 12,
         scenario: {
           type: "multiple_choice",
-          situation: "Climate projections show 20% increase in rainfall intensity and 15% increase in total annual precipitation by 2050. Your SWMM5 model must evaluate system performance under deep uncertainty with multiple climate scenarios and parameter uncertainty.",
-          question: "What is the MOST robust approach for uncertainty analysis in SWMM5 climate adaptation studies?",
+          situation: "Climate projections show 20% increase in rainfall intensity and 15% increase in total annual precipitation by 2050. Your SWMM model must evaluate system performance under deep uncertainty with multiple climate scenarios and parameter uncertainty.",
+          question: "What is the MOST robust approach for uncertainty analysis in SWMM climate adaptation studies?",
           options: [
             {
               id: "a",
@@ -598,7 +598,7 @@ export class MemStorage implements IStorage {
             }
           ],
           learningObjectives: [
-            "Master uncertainty quantification in SWMM5",
+            "Master uncertainty quantification in SWMM",
             "Apply climate science to urban drainage modeling",
             "Understand robust decision-making frameworks"
           ]
