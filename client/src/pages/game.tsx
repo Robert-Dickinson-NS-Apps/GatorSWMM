@@ -65,7 +65,7 @@ export default function Game() {
   });
 
   const progressMutation = useMutation({
-    mutationFn: (progress: any) => apiRequest("/api/game/progress", "POST", progress),
+    mutationFn: (progress: any) => apiRequest("POST", "/api/game/progress", progress),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/game/progress/demo-user"] });
     }
