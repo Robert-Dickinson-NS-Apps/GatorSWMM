@@ -283,6 +283,150 @@ export class MemStorage implements IStorage {
             "Use SWMM for pipe network analysis"
           ]
         }
+      },
+      {
+        title: "LID Controls Implementation",
+        description: "Master Low Impact Development controls in SWMM5 for sustainable stormwater management.",
+        difficulty: "intermediate",
+        category: "green infrastructure",
+        order: 4,
+        scenario: {
+          type: "multiple_choice",
+          situation: "A city wants to retrofit a parking lot with LID controls to reduce runoff volume by 30%. The lot is 2 acres with sandy soil (infiltration rate = 0.5 in/hr).",
+          question: "Which LID control would be MOST effective for this application?",
+          options: [
+            {
+              id: "a",
+              text: "Permeable pavement with underdrain",
+              correct: true,
+              explanation: "Correct! Permeable pavement is ideal for parking lots, allowing infiltration while maintaining functionality. With sandy soil and underdrain, it can achieve significant volume reduction."
+            },
+            {
+              id: "b",
+              text: "Bioretention cell",
+              correct: false,
+              explanation: "While effective, bioretention cells require dedicated space that may not be available in a parking lot retrofit."
+            },
+            {
+              id: "c",
+              text: "Green roof",
+              correct: false,
+              explanation: "Green roofs are for building tops, not parking lots."
+            },
+            {
+              id: "d",
+              text: "Infiltration trench",
+              correct: false,
+              explanation: "Trenches work well but require significant space and may interfere with parking operations."
+            }
+          ],
+          learningObjectives: [
+            "Select appropriate LID controls for specific applications",
+            "Understand LID performance in different soil conditions",
+            "Apply SWMM5 LID modeling capabilities"
+          ]
+        }
+      },
+      {
+        title: "St. Venant Equations",
+        description: "Understand how SWMM5 uses the St. Venant equations for dynamic wave routing in conduits.",
+        difficulty: "advanced",
+        category: "hydraulics",
+        order: 5,
+        scenario: {
+          type: "scenario_analysis",
+          situation: "SWMM5 uses the St. Venant equations for dynamic wave routing to model unsteady flow in conduits. These equations solve for both momentum and continuity.",
+          question: "Explain when you would choose Dynamic Wave routing over Kinematic Wave routing in SWMM5, and what hydraulic phenomena can only be captured with the St. Venant equations.",
+          correctAnswers: ["backwater", "reverse flow", "pressurization", "surcharging", "momentum", "acceleration"],
+          hints: [
+            "Consider flow conditions where momentum effects are important",
+            "Think about situations with varying downstream conditions",
+            "Consider when pipes may flow under pressure"
+          ],
+          solution: "Dynamic Wave routing using St. Venant equations should be used when: (1) Backwater effects are significant due to downstream restrictions, (2) Reverse flow may occur, (3) Conduits may become pressurized or surcharged, (4) Momentum and acceleration terms are important for accurate timing, (5) Complex hydraulic phenomena like hydraulic jumps need to be modeled. Kinematic Wave assumes uniform flow and cannot capture these effects.",
+          learningObjectives: [
+            "Understand the physics behind St. Venant equations",
+            "Choose appropriate routing methods in SWMM5",
+            "Recognize when momentum effects are important"
+          ]
+        }
+      },
+      {
+        title: "Storage Node Design",
+        description: "Design detention basins and storage facilities using SWMM5 storage nodes for flood control.",
+        difficulty: "intermediate",
+        category: "hydraulics",
+        order: 6,
+        scenario: {
+          type: "design_challenge",
+          situation: "Design a detention basin to reduce peak outflow from 45 CFS to 15 CFS for a 25-year storm. The basin has a fixed orifice outlet.",
+          parameters: {
+            peakInflow: 45, // CFS
+            targetOutflow: 15, // CFS
+            stormDuration: 6, // hours
+            requiredVolume: 3.2 // acre-feet
+          },
+          question: "What orifice diameter would you specify to achieve the target peak outflow of 15 CFS?",
+          hints: [
+            "Use orifice equation Q = Cd × A × sqrt(2gh)",
+            "Assume Cd = 0.6 for a sharp-edged orifice",
+            "Estimate head based on storage-discharge relationship",
+            "Consider that head varies as storage fills and empties"
+          ],
+          solution: {
+            orificeDiameter: 12, // inches
+            estimatedHead: 8, // feet
+            explanation: "A 12-inch orifice with approximately 8 feet of head will discharge about 15 CFS. The actual performance depends on the storage curve and routing through the storm event."
+          },
+          learningObjectives: [
+            "Design storage facilities using SWMM5",
+            "Apply hydraulic principles to outlet structures",
+            "Understand storage-indication routing"
+          ]
+        }
+      },
+      {
+        title: "Link Exfiltration Modeling",
+        description: "Model groundwater interaction and pipe exfiltration losses in aging urban infrastructure.",
+        difficulty: "advanced",
+        category: "hydrology",
+        order: 7,
+        scenario: {
+          type: "multiple_choice",
+          situation: "An old concrete sewer system has significant exfiltration losses. The 48-inch diameter pipes are 50 years old with joint deterioration. Groundwater table is 5 feet below the pipe invert.",
+          question: "How should exfiltration be modeled in SWMM5 for this aging infrastructure?",
+          options: [
+            {
+              id: "a",
+              text: "Use constant exfiltration rate based on pipe condition",
+              correct: false,
+              explanation: "Constant rates don't account for varying hydraulic conditions and water table interactions."
+            },
+            {
+              id: "b",
+              text: "Model as head-dependent exfiltration with appropriate loss coefficient",
+              correct: true,
+              explanation: "Correct! Head-dependent exfiltration accounts for varying hydraulic head and groundwater conditions. The loss rate varies with the difference between pipe flow depth and groundwater elevation."
+            },
+            {
+              id: "c",
+              text: "Ignore exfiltration since pipes are below groundwater",
+              correct: false,
+              explanation: "Even with high groundwater, exfiltration can occur when pipe flow depth exceeds groundwater elevation."
+            },
+            {
+              id: "d",
+              text: "Use infiltration/inflow instead of exfiltration",
+              correct: false,
+              explanation: "The question specifically asks about exfiltration (water leaving the system), not I/I (water entering the system)."
+            }
+          ],
+          learningObjectives: [
+            "Understand exfiltration modeling in SWMM5",
+            "Apply appropriate loss coefficients for aging infrastructure",
+            "Consider groundwater interactions in sewer modeling"
+          ]
+        }
       }
     ];
 
