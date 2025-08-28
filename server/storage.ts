@@ -954,6 +954,120 @@ export class MemStorage implements IStorage {
             { value: "Global", label: "Usage Worldwide" }
           ]
         }
+      },
+      {
+        title: "Conceptual Model",
+        slug: "conceptual-model",
+        order: 4,
+        content: {
+          type: "conceptual_model",
+          description: "SWMM5's conceptual model divides the urban drainage system into environmental compartments that interact through well-defined physical processes, enabling comprehensive simulation of the complete hydrologic and hydraulic cycle.",
+          compartments: [
+            {
+              name: "Atmospheric Compartment",
+              description: "Contains precipitation data and climatic conditions that drive the system",
+              processes: ["Rainfall input", "Evaporation rates", "Temperature effects", "Wind patterns"]
+            },
+            {
+              name: "Land Surface Compartment", 
+              description: "Represents the watershed surface where rainfall becomes runoff",
+              processes: ["Interception storage", "Depression storage", "Infiltration", "Surface runoff generation"]
+            },
+            {
+              name: "Groundwater Compartment",
+              description: "Models subsurface processes including aquifer interactions",
+              processes: ["Groundwater flow", "Baseflow contribution", "Percolation", "Exfiltration"]
+            },
+            {
+              name: "Transport System Compartment",
+              description: "Represents the engineered drainage infrastructure",
+              processes: ["Pipe flow", "Channel routing", "Storage detention", "Treatment processes"]
+            }
+          ],
+          interactions: [
+            {
+              from: "Atmospheric",
+              to: "Land Surface", 
+              process: "Precipitation drives surface processes"
+            },
+            {
+              from: "Land Surface",
+              to: "Groundwater",
+              process: "Infiltration recharges groundwater"
+            },
+            {
+              from: "Land Surface", 
+              to: "Transport System",
+              process: "Surface runoff enters drainage network"
+            },
+            {
+              from: "Groundwater",
+              to: "Transport System", 
+              process: "Baseflow and infiltration/inflow"
+            }
+          ],
+          keyPrinciples: [
+            "Mass conservation across all compartments",
+            "Energy conservation in hydraulic routing",
+            "Process-based parameter estimation",
+            "Spatial and temporal discretization"
+          ]
+        }
+      },
+      {
+        title: "LID Development", 
+        slug: "lid-development",
+        order: 5,
+        content: {
+          type: "lid_controls",
+          description: "Low Impact Development (LID) controls in SWMM5 represent sustainable stormwater management practices that reduce runoff through infiltration, evapotranspiration, and reuse, mimicking natural hydrologic processes.",
+          lidTypes: [
+            {
+              name: "Bioretention Cells",
+              description: "Vegetated depressions that filter and infiltrate runoff",
+              parameters: ["Surface area", "Soil depth", "Underdrain properties", "Plant characteristics"],
+              applications: ["Parking lot islands", "Roadside swales", "Rain gardens"]
+            },
+            {
+              name: "Infiltration Trenches",
+              description: "Gravel-filled excavations that promote groundwater recharge", 
+              parameters: ["Storage depth", "Void ratio", "Infiltration rate", "Clogging factors"],
+              applications: ["Linear drainage", "Property boundaries", "Highway medians"]
+            },
+            {
+              name: "Permeable Pavement",
+              description: "Porous surfaces that allow water to infiltrate through the pavement structure",
+              parameters: ["Pavement thickness", "Storage capacity", "Permeability", "Underdrain design"],
+              applications: ["Parking areas", "Sidewalks", "Low-traffic roads"]
+            },
+            {
+              name: "Green Roofs",
+              description: "Vegetated building rooftops that retain and slowly release rainfall",
+              parameters: ["Soil depth", "Drainage mat", "Plant selection", "Irrigation needs"],
+              applications: ["Commercial buildings", "Residential structures", "Industrial facilities"]
+            },
+            {
+              name: "Rain Barrels/Cisterns",
+              description: "Storage containers that capture and reuse rooftop runoff",
+              parameters: ["Storage volume", "Drain time", "Overflow handling", "Water quality"],
+              applications: ["Residential properties", "Small commercial", "Irrigation systems"]
+            }
+          ],
+          designConsiderations: [
+            "Site soil conditions and infiltration rates",
+            "Contributing drainage area and runoff coefficients", 
+            "Groundwater depth and contamination concerns",
+            "Maintenance requirements and access",
+            "Integration with existing infrastructure",
+            "Performance monitoring and adaptive management"
+          ],
+          modelingApproach: [
+            "Define LID unit properties and placement",
+            "Specify treatment train configurations",
+            "Calibrate performance parameters",
+            "Evaluate cost-effectiveness and co-benefits"
+          ]
+        }
       }
     ];
 
