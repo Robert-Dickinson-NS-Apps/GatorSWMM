@@ -91,6 +91,12 @@ export default function Home() {
                     Learn
                   </Button>
                 </a>
+                <a href="https://boards.autodesk.com/icm" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" size="sm" className="text-theme-secondary hover:bg-theme-light-primary">
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    ICM Hub
+                  </Button>
+                </a>
                 <Link href="/game">
                   <Button variant="ghost" size="sm" className="text-theme-secondary hover:bg-theme-light-secondary">
                     <Gamepad2 className="w-4 h-4 mr-2" />
