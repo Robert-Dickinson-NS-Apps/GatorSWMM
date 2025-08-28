@@ -427,6 +427,182 @@ export class MemStorage implements IStorage {
             "Consider groundwater interactions in sewer modeling"
           ]
         }
+      },
+      {
+        title: "SWMM5-ICM Integration",
+        description: "Master the integration between SWMM5 and InfoWorks ICM for comprehensive urban drainage modeling.",
+        difficulty: "expert",
+        category: "integration",
+        order: 8,
+        scenario: {
+          type: "scenario_analysis",
+          situation: "You're modeling a complex urban catchment where surface runoff (SWMM5) needs to interface with a detailed sewer network (ICM). The system includes real-time control structures, CSO overflows, and treatment plant capacity constraints.",
+          question: "Describe the critical considerations when setting up boundary conditions and data exchange between SWMM5 subcatchments and ICM network nodes. What are the potential sources of mass balance errors and how would you validate the coupled model?",
+          correctAnswers: ["boundary conditions", "time step synchronization", "unit conversion", "mass balance", "validation", "data exchange", "subcatchment discretization"],
+          hints: [
+            "Consider temporal and spatial resolution differences between models",
+            "Think about units and coordinate systems",
+            "Consider flow direction and momentum transfer at interfaces",
+            "Think about model validation and calibration strategies"
+          ],
+          solution: "Key considerations include: (1) Proper boundary condition setup ensuring flow continuity at SWMM5-ICM interfaces, (2) Time step synchronization to prevent numerical instabilities, (3) Unit conversions between different modeling frameworks, (4) Subcatchment discretization that matches network node spacing, (5) Validation through independent flow measurements at interface points, (6) Mass balance checks across the entire system, (7) Proper handling of backwater effects from ICM network influencing SWMM5 outfalls.",
+          learningObjectives: [
+            "Understand coupled model boundary conditions",
+            "Master data exchange protocols between modeling platforms",
+            "Apply validation techniques for integrated models"
+          ]
+        }
+      },
+      {
+        title: "ICM Real-Time Control Advanced Logic",
+        description: "Implement complex real-time control strategies in InfoWorks ICM for optimized system performance.",
+        difficulty: "expert", 
+        category: "controls",
+        order: 9,
+        scenario: {
+          type: "multiple_choice",
+          situation: "You're designing a real-time control system for a combined sewer network in ICM. The system has 5 storage tanks, 3 pump stations, and 2 CSO structures. During wet weather, you need to minimize overflows while preventing flooding.",
+          question: "What is the MOST sophisticated control strategy for this multi-objective optimization problem?",
+          options: [
+            {
+              id: "a",
+              text: "Simple level-based pump control with fixed setpoints",
+              correct: false,
+              explanation: "Basic control doesn't optimize across multiple objectives or adapt to system-wide conditions."
+            },
+            {
+              id: "b", 
+              text: "Predictive control using rainfall forecasts and system state optimization",
+              correct: true,
+              explanation: "Correct! Model Predictive Control (MPC) can optimize pump operations, storage utilization, and flow routing based on predicted rainfall and current system state to minimize both flooding and overflows."
+            },
+            {
+              id: "c",
+              text: "Rule-based control with if-then logic for each asset",
+              correct: false,
+              explanation: "Rule-based systems lack the sophistication to handle complex multi-objective optimization across interconnected assets."
+            },
+            {
+              id: "d",
+              text: "Flow equalization using constant discharge rates",
+              correct: false,
+              explanation: "Constant rates don't adapt to varying system conditions and may not prevent overflows during extreme events."
+            }
+          ],
+          learningObjectives: [
+            "Design advanced RTC strategies in ICM",
+            "Understand multi-objective optimization in sewer systems",
+            "Apply predictive control concepts to urban drainage"
+          ]
+        }
+      },
+      {
+        title: "ICM 2D Flood Modeling Integration",
+        description: "Master the coupling between 1D sewer networks and 2D surface flood modeling in InfoWorks ICM.",
+        difficulty: "expert",
+        category: "flood modeling",
+        order: 10,
+        scenario: {
+          type: "design_challenge", 
+          situation: "Model a 500-hectare urban area where sewer surcharging causes surface flooding. The 1D network has 200 manholes, and you need 2D flood mapping with 2m resolution. Coupling points occur at 50 manholes.",
+          parameters: {
+            area: 500, // hectares
+            manholes: 200,
+            resolution: 2, // meters
+            couplingPoints: 50,
+            rainEvent: "100-year 2-hour"
+          },
+          question: "What Manning's roughness values would you assign to different surface types for accurate 2D flood modeling, and how would you handle the 1D-2D coupling at manholes?",
+          hints: [
+            "Consider different urban surface types (roads, grass, buildings)",
+            "Think about energy losses at 1D-2D interface points",
+            "Consider computational stability and timestep requirements",
+            "Account for building representation in 2D mesh"
+          ],
+          solution: {
+            roughnessValues: {
+              roads: 0.015,
+              grass: 0.035,
+              buildings: 0.1,
+              parking: 0.02
+            },
+            couplingMethod: "Bidirectional energy-based exchange",
+            explanation: "Use Manning's n = 0.015 for roads, 0.035 for grassed areas, 0.1 for buildings, 0.02 for parking lots. Implement bidirectional coupling where manholes exchange flow based on energy grade line differences between 1D and 2D domains. Use 2D timesteps ≤ 1 second for stability."
+          },
+          learningObjectives: [
+            "Configure 1D-2D coupling in ICM",
+            "Select appropriate surface roughness parameters",
+            "Understand computational requirements for integrated modeling"
+          ]
+        }
+      },
+      {
+        title: "ICM Water Quality Advanced Modeling",
+        description: "Implement sophisticated water quality modeling including biochemical processes and sediment transport.",
+        difficulty: "expert",
+        category: "water quality",
+        order: 11,
+        scenario: {
+          type: "scenario_analysis",
+          situation: "You're modeling first flush effects, sediment deposition/erosion, and biochemical oxygen demand in a combined sewer system using ICM. The network includes CSO chambers with settling and a treatment plant with varying capacity.",
+          question: "Describe how you would calibrate the SWMM quality model parameters for TSS, BOD, and coliform decay, considering the interaction between hydraulic residence time, settling velocity, and biochemical decay processes.",
+          correctAnswers: ["first flush", "settling velocity", "decay coefficients", "hydraulic residence time", "washoff", "buildup", "TSS", "BOD", "coliform"],
+          hints: [
+            "Consider the relationship between hydraulic and quality parameters",
+            "Think about different pollutant behavior (conservative vs reactive)",
+            "Consider seasonal variations and temperature effects",
+            "Think about calibration data requirements and measurement locations"
+          ],
+          solution: "Calibration approach: (1) Use measured runoff quality data to establish buildup/washoff parameters for different land uses, (2) Calibrate settling velocities using TSS data from CSO chambers, (3) Determine BOD decay rates from in-sewer travel time studies, (4) Use tracer studies to validate hydraulic residence times, (5) Apply temperature-dependent coliform decay rates (T90 values), (6) Validate against treatment plant influent quality data, (7) Account for diurnal variations and first flush effects through event-based calibration.",
+          learningObjectives: [
+            "Calibrate complex water quality models",
+            "Understand pollutant fate and transport processes", 
+            "Apply biochemical modeling in urban drainage systems"
+          ]
+        }
+      },
+      {
+        title: "ICM Climate Change Adaptation",
+        description: "Design climate-resilient infrastructure using ICM's advanced scenario modeling and optimization tools.",
+        difficulty: "expert",
+        category: "climate adaptation",
+        order: 12,
+        scenario: {
+          type: "multiple_choice",
+          situation: "Climate projections show 20% increase in rainfall intensity and 15% increase in total annual precipitation by 2050. Your ICM model shows current system failures during 10-year events will become annual occurrences.",
+          question: "What is the MOST comprehensive adaptation strategy for long-term resilience?",
+          options: [
+            {
+              id: "a",
+              text: "Increase all pipe diameters by 20% uniformly across the network",
+              correct: false,
+              explanation: "Uniform upsizing is inefficient and doesn't address system bottlenecks or utilize green infrastructure opportunities."
+            },
+            {
+              id: "b",
+              text: "Implement adaptive management with flexible infrastructure and monitoring",
+              correct: true,
+              explanation: "Correct! Adaptive management combines traditional infrastructure (strategic upsizing), green infrastructure (LIDs), real-time control optimization, and monitoring systems that can adjust operations as climate impacts evolve."
+            },
+            {
+              id: "c", 
+              text: "Add storage tanks at all system bottlenecks identified in current analysis",
+              correct: false,
+              explanation: "Static solutions based on current conditions may not address future uncertainties and changing rainfall patterns."
+            },
+            {
+              id: "d",
+              text: "Convert entire system to separate sewers with new storm networks",
+              correct: false,
+              explanation: "Complete system replacement is extremely costly and may not be technically feasible in dense urban areas."
+            }
+          ],
+          learningObjectives: [
+            "Apply climate change projections in ICM modeling",
+            "Design adaptive infrastructure strategies",
+            "Understand uncertainty analysis and flexible design principles"
+          ]
+        }
       }
     ];
 
