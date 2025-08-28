@@ -603,6 +603,139 @@ export class MemStorage implements IStorage {
             "Understand uncertainty analysis and flexible design principles"
           ]
         }
+      },
+      {
+        title: "St. Venant Equations: ICM vs SWMM5 Implementation",
+        description: "Compare the numerical implementation differences of St. Venant equations between InfoWorks ICM and SWMM5.",
+        difficulty: "expert",
+        category: "hydraulics",
+        order: 13,
+        scenario: {
+          type: "scenario_analysis",
+          situation: "You're modeling a 1200mm trunk sewer with significant backwater effects. The pipe operates under both free surface and pressurized conditions during storm events. You need to choose between ICM's Preissmann scheme and SWMM5's dynamic wave routing.",
+          question: "Analyze the key differences between ICM's implementation of the St. Venant equations (Preissmann implicit scheme) versus SWMM5's dynamic wave approach. How do these differences affect computational stability, accuracy, and the ability to handle transitions between free surface and pressurized flow?",
+          correctAnswers: ["preissmann scheme", "implicit", "explicit", "cfl condition", "pressure flow", "free surface", "slot model", "computational stability"],
+          hints: [
+            "Consider the time-stepping approach (implicit vs explicit)",
+            "Think about how each software handles pressurization",
+            "Consider computational efficiency and stability requirements",
+            "Think about the treatment of momentum terms and friction"
+          ],
+          solution: "Key differences: (1) ICM uses Preissmann implicit finite difference scheme which allows larger time steps and better stability but requires matrix solutions, (2) SWMM5 uses explicit finite difference with CFL-limited time steps requiring smaller timesteps but simpler computations, (3) ICM handles pressurization through a slot model that maintains the 1D framework, (4) SWMM5 switches to a pressure flow algorithm when pipes surcharge, (5) ICM's implicit scheme better handles rapid flow transitions and reverse flow, (6) SWMM5's approach is more computationally efficient for large networks but may require very small time steps for stability.",
+          learningObjectives: [
+            "Understand numerical scheme differences in hydraulic modeling",
+            "Compare implicit vs explicit finite difference approaches",
+            "Analyze computational trade-offs in complex flow modeling"
+          ]
+        }
+      },
+      {
+        title: "Advanced 2D Shallow Water Equations",
+        description: "Master the implementation of 2D shallow water equations for urban flood modeling with complex boundary conditions.",
+        difficulty: "expert",
+        category: "2d modeling",
+        order: 14,
+        scenario: {
+          type: "multiple_choice",
+          situation: "You're modeling urban flooding using 2D shallow water equations. The domain includes buildings, roads with curbs, underground parking entrances, and variable terrain. The mesh has 50,000 elements with resolution from 0.5m to 5m.",
+          question: "What is the MOST critical consideration for ensuring numerical stability and physical accuracy in this complex 2D flood model?",
+          options: [
+            {
+              id: "a",
+              text: "Using uniform Manning's roughness across the entire domain",
+              correct: false,
+              explanation: "Uniform roughness ignores the significant flow resistance variations between different urban surface types."
+            },
+            {
+              id: "b",
+              text: "Implementing proper treatment of wet-dry boundaries and building representation",
+              correct: true,
+              explanation: "Correct! Wet-dry boundary treatment prevents numerical instabilities at flood fronts, while proper building representation (as obstacles or high roughness zones) is crucial for accurate flow paths and depths."
+            },
+            {
+              id: "c",
+              text: "Using the smallest possible time step throughout the simulation",
+              correct: false,
+              explanation: "While small time steps improve stability, adaptive time stepping based on CFL condition is more efficient and equally stable."
+            },
+            {
+              id: "d",
+              text: "Applying no-slip boundary conditions at all solid boundaries",
+              correct: false,
+              explanation: "No-slip conditions are inappropriate for shallow water equations; slip conditions or wall functions are more suitable."
+            }
+          ],
+          learningObjectives: [
+            "Understand critical aspects of 2D flood modeling",
+            "Master wet-dry boundary treatment techniques",
+            "Apply appropriate boundary conditions for urban environments"
+          ]
+        }
+      },
+      {
+        title: "2D Mesh Generation and Adaptive Refinement",
+        description: "Design optimal mesh strategies for complex urban domains with adaptive refinement based on flow characteristics.",
+        difficulty: "expert",
+        category: "2d modeling",
+        order: 15,
+        scenario: {
+          type: "design_challenge",
+          situation: "Design a 2D mesh for a 10 km² urban watershed with diverse features: dense city center, suburban areas, major highways, river corridors, and industrial zones. Flow velocities range from 0.1 to 8 m/s.",
+          parameters: {
+            domain_area: 10, // km²
+            velocity_range: "0.1-8", // m/s
+            features: ["city center", "suburbs", "highways", "rivers", "industrial"],
+            target_elements: 150000
+          },
+          question: "Specify your mesh refinement strategy including element size criteria, adaptive refinement triggers, and quality metrics to ensure computational efficiency while capturing critical flow physics.",
+          hints: [
+            "Consider Courant number requirements for stability",
+            "Think about geometric features requiring fine resolution",
+            "Consider flow gradients and velocity variations",
+            "Balance computational cost with accuracy requirements"
+          ],
+          solution: {
+            mesh_strategy: {
+              city_center: "0.5-2m elements",
+              highways: "1-3m elements", 
+              rivers: "2-5m along channels",
+              suburbs: "5-10m elements",
+              refinement_criteria: "velocity gradient > 2 m/s/m, depth gradient > 0.5 m/m",
+              quality_metric: "minimum angle > 25°, aspect ratio < 4"
+            },
+            explanation: "Use finest resolution (0.5-2m) in dense urban areas for building representation, medium resolution (1-3m) along highways for flow channeling, variable resolution (2-5m) in river corridors following channel geometry, coarser resolution (5-10m) in suburban areas, and adaptive refinement based on velocity/depth gradients exceeding thresholds. Maintain element quality with minimum angles >25° and aspect ratios <4."
+          },
+          learningObjectives: [
+            "Design efficient mesh strategies for complex domains",
+            "Apply adaptive refinement criteria based on flow physics",
+            "Balance computational efficiency with modeling accuracy"
+          ]
+        }
+      },
+      {
+        title: "2D-1D Coupling Advanced Techniques",
+        description: "Implement sophisticated coupling between 2D surface models and 1D channel/sewer networks.",
+        difficulty: "expert",
+        category: "2d modeling",
+        order: 16,
+        scenario: {
+          type: "scenario_analysis",
+          situation: "You're modeling a complex urban system where surface flooding interacts with both river channels and sewer networks. The system includes 50 river cross-sections, 200 manholes, and 5 km² of 2D surface domain. Coupling occurs through weirs, orifices, and direct connections.",
+          question: "Describe the numerical challenges and solution strategies for maintaining mass conservation and stability when coupling 2D shallow water equations with 1D river flow and 1D sewer hydraulics. Address time step synchronization, interface boundary conditions, and validation approaches.",
+          correctAnswers: ["mass conservation", "interface boundary conditions", "time step synchronization", "energy continuity", "subcritical supercritical", "coupling algorithms", "validation"],
+          hints: [
+            "Consider different time stepping requirements between models",
+            "Think about energy and momentum conservation at interfaces",
+            "Consider flow regime transitions at coupling points",
+            "Think about iterative solution algorithms for coupled systems"
+          ],
+          solution: "Key strategies include: (1) Implement mass-conservative coupling algorithms that ensure continuity equation satisfaction across all interfaces, (2) Use energy-based boundary conditions at 1D-2D interfaces to handle subcritical/supercritical transitions, (3) Apply adaptive time step synchronization where 2D domain may require smaller steps than 1D networks, (4) Use iterative coupling procedures within each time step to achieve convergence, (5) Validate through independent measurements at coupling points and overall watershed mass balance checks, (6) Implement specialized treatment for flow reversals and complex hydraulic structures, (7) Use sub-time stepping at interfaces during rapid flow changes.",
+          learningObjectives: [
+            "Master advanced coupling algorithms for integrated models",
+            "Understand mass and energy conservation in coupled systems",
+            "Apply validation techniques for complex integrated models"
+          ]
+        }
       }
     ];
 
