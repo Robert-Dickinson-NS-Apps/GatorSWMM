@@ -217,7 +217,7 @@ export default function Game() {
           <div className="space-y-8">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-theme-secondary mb-4">
-                Choose Your SWMM5 Challenge
+                SWMM5 and ICM
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
                 Test your understanding of stormwater modeling concepts through interactive scenarios. 
