@@ -429,178 +429,178 @@ export class MemStorage implements IStorage {
         }
       },
       {
-        title: "SWMM5-ICM Integration",
-        description: "Master the integration between SWMM5 and InfoWorks ICM for comprehensive urban drainage modeling.",
+        title: "SWMM5 Dynamic Wave Routing Advanced Implementation",
+        description: "Master the most sophisticated hydraulic routing method in SWMM5 for complex flow conditions.",
         difficulty: "expert",
-        category: "integration",
+        category: "hydraulics",
         order: 8,
         scenario: {
           type: "scenario_analysis",
-          situation: "You're modeling a complex urban catchment where surface runoff (SWMM5) needs to interface with a detailed sewer network (ICM). The system includes real-time control structures, CSO overflows, and treatment plant capacity constraints.",
-          question: "Describe the critical considerations when setting up boundary conditions and data exchange between SWMM5 subcatchments and ICM network nodes. What are the potential sources of mass balance errors and how would you validate the coupled model?",
-          correctAnswers: ["boundary conditions", "time step synchronization", "unit conversion", "mass balance", "validation", "data exchange", "subcatchment discretization"],
+          situation: "You're modeling a 2-mile trunk sewer system with multiple pump stations, complex storage tanks, and varying pipe slopes. The system experiences rapid flow transitions, backwater effects, and periodic surcharging during storm events.",
+          question: "Analyze the numerical challenges of implementing dynamic wave routing for this system. Discuss the impact of the Courant-Friedrichs-Lewy (CFL) condition, grid convergence, and how SWMM5 handles the transition from free surface to pressurized flow. What calibration strategies would you use for friction factors and minor losses?",
+          correctAnswers: ["cfl condition", "courant number", "grid convergence", "pressurized flow", "friction factors", "minor losses", "manning roughness", "time step"],
           hints: [
-            "Consider temporal and spatial resolution differences between models",
-            "Think about units and coordinate systems",
-            "Consider flow direction and momentum transfer at interfaces",
-            "Think about model validation and calibration strategies"
+            "Consider numerical stability requirements for explicit schemes",
+            "Think about spatial and temporal discretization effects",
+            "Consider how SWMM5 switches between flow regimes",
+            "Think about parameter sensitivity and calibration data needs"
           ],
-          solution: "Key considerations include: (1) Proper boundary condition setup ensuring flow continuity at SWMM5-ICM interfaces, (2) Time step synchronization to prevent numerical instabilities, (3) Unit conversions between different modeling frameworks, (4) Subcatchment discretization that matches network node spacing, (5) Validation through independent flow measurements at interface points, (6) Mass balance checks across the entire system, (7) Proper handling of backwater effects from ICM network influencing SWMM5 outfalls.",
+          solution: "Key considerations: (1) CFL condition requires time steps ≤ 0.5×(Δx/V+c) where V is velocity and c is wave celerity, (2) Grid convergence testing ensures spatial discretization doesn't affect results, (3) SWMM5 uses slot model for pressurization maintaining Saint-Venant framework, (4) Friction calibration requires flow/depth measurements at multiple locations, (5) Minor losses (K-factors) significantly affect results in complex systems, (6) Sensitivity analysis identifies critical parameters, (7) Multi-event calibration captures different flow regimes.",
           learningObjectives: [
-            "Understand coupled model boundary conditions",
-            "Master data exchange protocols between modeling platforms",
-            "Apply validation techniques for integrated models"
+            "Master advanced numerical methods in SWMM5",
+            "Understand computational fluid dynamics principles",
+            "Apply sophisticated calibration techniques"
           ]
         }
       },
       {
-        title: "ICM Real-Time Control Advanced Logic",
-        description: "Implement complex real-time control strategies in InfoWorks ICM for optimized system performance.",
+        title: "SWMM5 Water Quality Advanced Kinetics",
+        description: "Master sophisticated pollutant fate and transport modeling with complex biochemical processes.",
         difficulty: "expert", 
-        category: "controls",
+        category: "water quality",
         order: 9,
         scenario: {
           type: "multiple_choice",
-          situation: "You're designing a real-time control system for a combined sewer network in ICM. The system has 5 storage tanks, 3 pump stations, and 2 CSO structures. During wet weather, you need to minimize overflows while preventing flooding.",
-          question: "What is the MOST sophisticated control strategy for this multi-objective optimization problem?",
+          situation: "You're modeling a combined sewer system where organic matter undergoes biochemical transformations. The model must account for BOD decay, nitrification, denitrification, and sediment-pollutant interactions during varying residence times.",
+          question: "What is the MOST critical factor when modeling first-order decay kinetics for multiple interacting pollutants in SWMM5?",
           options: [
             {
               id: "a",
-              text: "Simple level-based pump control with fixed setpoints",
+              text: "Using constant decay rates for all environmental conditions",
               correct: false,
-              explanation: "Basic control doesn't optimize across multiple objectives or adapt to system-wide conditions."
+              explanation: "Constant rates ignore temperature, pH, and dissolved oxygen variations that significantly affect biochemical processes."
             },
             {
               id: "b", 
-              text: "Predictive control using rainfall forecasts and system state optimization",
+              text: "Temperature-dependent decay coefficients with proper stoichiometric relationships",
               correct: true,
-              explanation: "Correct! Model Predictive Control (MPC) can optimize pump operations, storage utilization, and flow routing based on predicted rainfall and current system state to minimize both flooding and overflows."
+              explanation: "Correct! Temperature correction (θ^(T-20)) and stoichiometric coupling between processes (BOD→DO consumption, NH3→NO3 conversion) are essential for accurate kinetics modeling."
             },
             {
               id: "c",
-              text: "Rule-based control with if-then logic for each asset",
+              text: "Ignoring biochemical interactions between pollutants",
               correct: false,
-              explanation: "Rule-based systems lack the sophistication to handle complex multi-objective optimization across interconnected assets."
+              explanation: "Pollutant interactions are fundamental - BOD consumes oxygen, affecting other processes like nitrification."
             },
             {
               id: "d",
-              text: "Flow equalization using constant discharge rates",
+              text: "Using only washoff coefficients without decay processes",
               correct: false,
-              explanation: "Constant rates don't adapt to varying system conditions and may not prevent overflows during extreme events."
+              explanation: "This ignores in-system transformations that significantly alter pollutant concentrations during transport."
             }
           ],
           learningObjectives: [
-            "Design advanced RTC strategies in ICM",
-            "Understand multi-objective optimization in sewer systems",
-            "Apply predictive control concepts to urban drainage"
+            "Master biochemical kinetics in SWMM5",
+            "Understand temperature effects on pollutant fate",
+            "Apply stoichiometric relationships in water quality modeling"
           ]
         }
       },
       {
-        title: "ICM 2D Flood Modeling Integration",
-        description: "Master the coupling between 1D sewer networks and 2D surface flood modeling in InfoWorks ICM.",
+        title: "SWMM5 Groundwater-Surface Water Interaction",
+        description: "Model complex groundwater interactions with sophisticated aquifer representation in SWMM5.",
         difficulty: "expert",
-        category: "flood modeling",
+        category: "hydrology",
         order: 10,
         scenario: {
           type: "design_challenge", 
-          situation: "Model a 500-hectare urban area where sewer surcharging causes surface flooding. The 1D network has 200 manholes, and you need 2D flood mapping with 2m resolution. Coupling points occur at 50 manholes.",
+          situation: "Model a 200-hectare urban watershed with varying groundwater depths (2-15 feet), three distinct soil types, and seasonal water table fluctuations. The system includes both groundwater infiltration and exfiltration processes.",
           parameters: {
-            area: 500, // hectares
-            manholes: 200,
-            resolution: 2, // meters
-            couplingPoints: 50,
-            rainEvent: "100-year 2-hour"
+            area: 200, // hectares
+            gw_depth_range: "2-15", // feet
+            soil_types: 3,
+            seasonal_variation: "6-foot annual fluctuation",
+            climate: "humid subtropical"
           },
-          question: "What Manning's roughness values would you assign to different surface types for accurate 2D flood modeling, and how would you handle the 1D-2D coupling at manholes?",
+          question: "Design the groundwater component including aquifer parameters, moisture accounting, and calibration strategy. How would you handle the nonlinear relationship between groundwater depth and lateral flow?",
           hints: [
-            "Consider different urban surface types (roads, grass, buildings)",
-            "Think about energy losses at 1D-2D interface points",
-            "Consider computational stability and timestep requirements",
-            "Account for building representation in 2D mesh"
+            "Consider groundwater flow equation parameters in SWMM5",
+            "Think about moisture accounting and evapotranspiration",
+            "Consider seasonal calibration and validation approaches",
+            "Account for urban impacts on natural groundwater flow"
           ],
           solution: {
-            roughnessValues: {
-              roads: 0.015,
-              grass: 0.035,
-              buildings: 0.1,
-              parking: 0.02
+            aquifer_params: {
+              porosity: "0.25-0.45 by soil type",
+              field_capacity: "0.15-0.35",
+              conductivity: "0.1-50 in/hr",
+              groundwater_flow_coeff: "0.001-0.1"
             },
-            couplingMethod: "Bidirectional energy-based exchange",
-            explanation: "Use Manning's n = 0.015 for roads, 0.035 for grassed areas, 0.1 for buildings, 0.02 for parking lots. Implement bidirectional coupling where manholes exchange flow based on energy grade line differences between 1D and 2D domains. Use 2D timesteps ≤ 1 second for stability."
+            calibration_strategy: "Multi-season approach with water table monitoring",
+            explanation: "Use SWMM5's 3-layer groundwater model with soil-specific porosity (sandy: 0.45, clay: 0.25), field capacity, and conductivity. Calibrate groundwater flow coefficient using baseflow measurements. Account for seasonal ET variations and urban heat island effects. Validate against water table measurements at multiple monitoring wells."
           },
           learningObjectives: [
-            "Configure 1D-2D coupling in ICM",
-            "Select appropriate surface roughness parameters",
-            "Understand computational requirements for integrated modeling"
+            "Master SWMM5 groundwater modeling capabilities",
+            "Understand subsurface hydrology principles",
+            "Apply groundwater calibration techniques"
           ]
         }
       },
       {
-        title: "ICM Water Quality Advanced Modeling",
-        description: "Implement sophisticated water quality modeling including biochemical processes and sediment transport.",
+        title: "SWMM5 Advanced LID Performance Modeling",
+        description: "Optimize complex LID treatment trains with detailed performance modeling and cost-effectiveness analysis.",
         difficulty: "expert",
-        category: "water quality",
+        category: "green infrastructure",
         order: 11,
         scenario: {
           type: "scenario_analysis",
-          situation: "You're modeling first flush effects, sediment deposition/erosion, and biochemical oxygen demand in a combined sewer system using ICM. The network includes CSO chambers with settling and a treatment plant with varying capacity.",
-          question: "Describe how you would calibrate the SWMM quality model parameters for TSS, BOD, and coliform decay, considering the interaction between hydraulic residence time, settling velocity, and biochemical decay processes.",
-          correctAnswers: ["first flush", "settling velocity", "decay coefficients", "hydraulic residence time", "washoff", "buildup", "TSS", "BOD", "coliform"],
+          situation: "You're designing a comprehensive LID treatment train for a 50-acre mixed-use development. The system includes bioretention cells, permeable pavement, green roofs, and constructed wetlands with varying soil conditions and maintenance requirements.",
+          question: "Develop a comprehensive modeling approach for this LID treatment train including performance optimization, long-term degradation effects, and life-cycle cost analysis. How would you account for clogging, seasonal variations, and cumulative pollutant removal efficiency?",
+          correctAnswers: ["treatment train", "clogging factors", "seasonal variation", "cumulative removal", "life cycle cost", "performance degradation", "maintenance scheduling"],
           hints: [
-            "Consider the relationship between hydraulic and quality parameters",
-            "Think about different pollutant behavior (conservative vs reactive)",
-            "Consider seasonal variations and temperature effects",
-            "Think about calibration data requirements and measurement locations"
+            "Consider LID performance reduction over time",
+            "Think about series vs parallel treatment configurations",
+            "Consider maintenance costs and effectiveness restoration",
+            "Think about pollutant removal synergies and antagonisms"
           ],
-          solution: "Calibration approach: (1) Use measured runoff quality data to establish buildup/washoff parameters for different land uses, (2) Calibrate settling velocities using TSS data from CSO chambers, (3) Determine BOD decay rates from in-sewer travel time studies, (4) Use tracer studies to validate hydraulic residence times, (5) Apply temperature-dependent coliform decay rates (T90 values), (6) Validate against treatment plant influent quality data, (7) Account for diurnal variations and first flush effects through event-based calibration.",
+          solution: "Modeling approach: (1) Configure treatment train with series connections for optimal pollutant removal, (2) Apply time-dependent clogging factors reducing infiltration rates (bioretention: 50% in 5 years, permeable pavement: 70% in 3 years), (3) Model seasonal performance variations with temperature-dependent biological processes, (4) Calculate cumulative removal efficiency accounting for pollutant interactions, (5) Include maintenance costs and performance restoration cycles, (6) Validate with long-term monitoring data and adjust parameters based on observed performance degradation, (7) Optimize configuration using benefit-cost analysis.",
           learningObjectives: [
-            "Calibrate complex water quality models",
-            "Understand pollutant fate and transport processes", 
-            "Apply biochemical modeling in urban drainage systems"
+            "Master advanced LID modeling in SWMM5",
+            "Understand long-term performance prediction", 
+            "Apply life-cycle cost analysis to green infrastructure"
           ]
         }
       },
       {
-        title: "ICM Climate Change Adaptation",
-        description: "Design climate-resilient infrastructure using ICM's advanced scenario modeling and optimization tools.",
+        title: "SWMM5 Extreme Event Modeling and Uncertainty Analysis",
+        description: "Model extreme precipitation events with comprehensive uncertainty quantification and risk assessment.",
         difficulty: "expert",
         category: "climate adaptation",
         order: 12,
         scenario: {
           type: "multiple_choice",
-          situation: "Climate projections show 20% increase in rainfall intensity and 15% increase in total annual precipitation by 2050. Your ICM model shows current system failures during 10-year events will become annual occurrences.",
-          question: "What is the MOST comprehensive adaptation strategy for long-term resilience?",
+          situation: "Climate projections show 20% increase in rainfall intensity and 15% increase in total annual precipitation by 2050. Your SWMM5 model must evaluate system performance under deep uncertainty with multiple climate scenarios and parameter uncertainty.",
+          question: "What is the MOST robust approach for uncertainty analysis in SWMM5 climate adaptation studies?",
           options: [
             {
               id: "a",
-              text: "Increase all pipe diameters by 20% uniformly across the network",
+              text: "Use single climate projection with sensitivity analysis on key parameters",
               correct: false,
-              explanation: "Uniform upsizing is inefficient and doesn't address system bottlenecks or utilize green infrastructure opportunities."
+              explanation: "Single projections don't capture climate uncertainty and may lead to maladaptive decisions."
             },
             {
               id: "b",
-              text: "Implement adaptive management with flexible infrastructure and monitoring",
+              text: "Monte Carlo simulation with multiple climate models and parameter distributions",
               correct: true,
-              explanation: "Correct! Adaptive management combines traditional infrastructure (strategic upsizing), green infrastructure (LIDs), real-time control optimization, and monitoring systems that can adjust operations as climate impacts evolve."
+              explanation: "Correct! Monte Carlo approach with ensemble climate projections and probabilistic parameter distributions provides comprehensive uncertainty quantification for robust decision-making under deep uncertainty."
             },
             {
               id: "c", 
-              text: "Add storage tanks at all system bottlenecks identified in current analysis",
+              text: "Deterministic analysis using worst-case climate scenario",
               correct: false,
-              explanation: "Static solutions based on current conditions may not address future uncertainties and changing rainfall patterns."
+              explanation: "Worst-case scenarios may lead to over-conservative and economically inefficient designs."
             },
             {
               id: "d",
-              text: "Convert entire system to separate sewers with new storm networks",
+              text: "Historical rainfall patterns adjusted by fixed climate factors",
               correct: false,
-              explanation: "Complete system replacement is extremely costly and may not be technically feasible in dense urban areas."
+              explanation: "Simple scaling doesn't capture changes in rainfall patterns, storm structure, and extreme event frequencies."
             }
           ],
           learningObjectives: [
-            "Apply climate change projections in ICM modeling",
-            "Design adaptive infrastructure strategies",
-            "Understand uncertainty analysis and flexible design principles"
+            "Master uncertainty quantification in SWMM5",
+            "Apply climate science to urban drainage modeling",
+            "Understand robust decision-making frameworks"
           ]
         }
       },
