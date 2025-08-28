@@ -85,12 +85,12 @@ export default function Home() {
               
               {/* Navigation */}
               <div className="flex items-center space-x-4">
-                <Link href="/">
+                <a href="https://www.linkedin.com/newsletters/7159940733972434944/" target="_blank" rel="noopener noreferrer">
                   <Button variant="ghost" size="sm" className="text-theme-secondary hover:bg-theme-light-primary">
                     <Circle className="w-4 h-4 mr-2" />
                     Learn
                   </Button>
-                </Link>
+                </a>
                 <Link href="/game">
                   <Button variant="ghost" size="sm" className="text-theme-secondary hover:bg-theme-light-secondary">
                     <Gamepad2 className="w-4 h-4 mr-2" />
